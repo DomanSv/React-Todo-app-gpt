@@ -1,0 +1,31 @@
+export const errMessages = {
+	// auth
+	provideUserRequiredFields: "Please provide both Username and Password!",
+	noUserForCredentials: "No user with these credentials found!",
+	noUserForToken: "No user found! Check the token you are sending!",
+	usernameMinLength: "Username must be longer than 2 characters!",
+	usernameMaxLength: "Username must be shorter than 50 characters!",
+	usernameAlreadyExists: "Username already exists!",
+	passwordNoMatch: "Password does not match!",
+	passwordPattern: "Password must be minimum 8 characters, 1 uppercase letter, 1 lowercase letter and 1 number!",
+	// todos
+	provideTodoRequiredFields: "Please provide both a Title and Priority value!",
+	titleMinLength: "Title must be longer than 2 characters!",
+	titleMaxLength: "Title must be shorter than 50 characters!",
+	priorityValueOptions: "Priority value must be either 'low', 'mid' or 'high'!",
+	descriptionMinLength: "Description must be longer than 2 characters!",
+	descriptionMaxLength: "Description must be shorter than 500 characters!",
+	subTasksMaxLength: "Maximum number of subTasks is 5!",
+	provideSubTaskRequiredField: "SubTodo: Please provide a Title!",
+	subTasksTitleMinLength: "SubTodo: Title must be longer than 2 characters!",
+	subTasksTitleMaxLength: "SubTodo: Title must be shorter than 50 characters!",
+	todoNotFound: (todoId) => `Todo with id:'${todoId}' not found!`,
+	subTodoNotFound: (todoId, subTodoId) => `Sub Todo with id:'${subTodoId}' in todo with id:'${todoId}' not found!`,
+	deleteRequiredParam: "You must provide 'id' param!",
+	deleteSubTodoRequiredParams: "You must provide both 'id' and 'subTodoId' params!",
+	editRequiredParam: "You must provide 'id' param!",
+	getTodoByIdRequiredParam: "You must provide 'id' param!",
+	// generic
+	somethingWentWrong: "Something went wrong!",
+	unauthorized: "Unauthorized!",
+};

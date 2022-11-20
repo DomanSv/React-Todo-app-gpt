@@ -1,0 +1,17 @@
+# Ignore artifacts:
+dist
+coverage
+
+**/*.toml
+**/*.DS_Store
+**/*.svg
+
+.eslintignore
+.prettierignore
+.dockerignore
+.editorconfig
+.env
+.gitignore
+.npmrc
+
+Dockerfile.*

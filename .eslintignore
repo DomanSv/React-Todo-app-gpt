@@ -1,0 +1,16 @@
+**/*.html
+**/*.css
+**/*.svg
+**/*.md
+**/*.yml
+**/*.toml
+**/*.DS_Store
+**/*.json
+
+Dockerfile.**
+
+**/*.spec.js
+**/*.spec.jsx
+
+**/dist
+**/coverage
