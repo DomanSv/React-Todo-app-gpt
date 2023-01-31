@@ -1,25 +1,25 @@
 version: "3.8"
 services:
-    app:
-        environment:
-            - REACT_APP_DOCKER_RUN=true
-        container_name: dreamix-react-todo
-        build:
-            context: .
-            dockerfile: Dockerfile
-        volumes:
-            - /app/node_modules
-            - .:/app
-        ports:
-            - "3000:3000"
-        stdin_open: true
-    storybook:
-        container_name: storybook-dreamix-react-todo
-        build:
-            context: .
-            dockerfile: Dockerfile.storybook
-        volumes:
-            - /app/node_modules
-            - .:/app
-        ports:
-            - "6006:6006"
+  app:
+    environment:
+      - REACT_APP_DOCKER_RUN=true
+    container_name: dreamix-react-todo
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - .:/app
+    ports:
+      - "3000:3000"
+    stdin_open: true
+  storybook:
+    container_name: storybook-dreamix-react-todo
+    build:
+      context: .
+      dockerfile: Dockerfile.storybook
+    volumes:
+      - /app/node_modules
+      - .:/app
+    ports:
+      - "6006:6006"
