@@ -3,25 +3,27 @@ import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import App  from "./App";
+import App from "./App";
 
 import { prepareMocks } from "./mocks";
 import "./index.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries:{
+    queries: {
       retry: 1,
-      refetchOnWindowFocus:false,
+      refetchOnWindowFocus: false,
     },
   },
 });
 
 prepareMocks().then(() => {
-  ReactDOM.createRoot(document.getElementById("root")).render(<React.StrictMode>
-    <QueryClientProvider client = {queryClient}>
-    <App />
-    <ReactQueryDevtools />
-    </QueryClientProvider>
-  </React.StrictMode>);
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <App />
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </React.StrictMode>
+  );
 });
