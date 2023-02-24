@@ -1,13 +1,9 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../components/forms/Input";
 import Password from "../../components/forms/Password";
 import { useRegister } from "../../hooks";
-import { ClosedEye, Eye } from "../../icons";
 
 export default function Register() {
-  const [passVisible, setPassVisible] = useState(false);
-
   const {
     register: registerUser,
     isLoading,
@@ -44,10 +40,7 @@ export default function Register() {
           maxLength: { value: 50, message: "Username must be less than 50 characters!" },
         })}
       />
-      <Password passVisible={passVisible} errors={errors} register={register} />
-      <button type='button' onClick={() => setPassVisible((v) => !v)} className='text-violet-600'>
-        {passVisible ? <ClosedEye className='h-7 w-7' /> : <Eye className='h-7 w-7' />}
-      </button>
+      <Password errors={errors} register={register} />
       {isLoading && "Loading..."}
       {Boolean(serverError) && <div className='bg-red-600 text-white'>{serverError}</div>}
       <button className='my-4 border p-2'>Submit</button>
