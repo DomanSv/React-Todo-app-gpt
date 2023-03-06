@@ -4,7 +4,7 @@ import Input from "../../components/forms/Input";
 import { ClosedEye, Eye } from "../../icons";
 
 export default function Password(props) {
-  const { errors, register } = props;
+  const { errors, user } = props;
   const [passVisible, setPassVisible] = useState(false);
 
   return (
@@ -14,7 +14,7 @@ export default function Password(props) {
         placeholder='Password'
         label='Password'
         error={errors}
-        {...register("password", {
+        {...user("password", {
           required: { value: true, message: "Password field is required!" },
           pattern: {
             value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
@@ -22,7 +22,7 @@ export default function Password(props) {
           },
         })}
       />
-      <button type='button' onClick={() => setPassVisible((v) => !v)} className='text-violet-600'>
+      <button type='button' onClick={() => setPassVisible((v) => !v)} className='text-blue-600'>
         {passVisible ? <ClosedEye className='h-7 w-7' /> : <Eye className='h-7 w-7' />}
       </button>
     </div>

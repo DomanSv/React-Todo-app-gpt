@@ -1,18 +1,30 @@
 import { useForm } from "react-hook-form";
-import Input from "../../components/forms/Input";
-import Password from "../../components/forms/Password";
+import UserForm from "../../components/forms/UserForm";
 import { useRegister } from "../../hooks";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+
+  const navigateTo = useNavigate();
+
   const {
     register: registerUser,
     isLoading,
     error,
   } = useRegister({
-    onSuccess: (res) => {
-      console.log(res);
+    onSuccess: () => {
+      navigateTo('/login');
     },
   });
+  
+  const divStyle = {
+    width: '50%',
+    margin: 'auto',
+    backgroundColor: '#F7FFF7',
+    padding: '20px',
+    borderRadius: '5px',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+  };
 
   const {
     register,
@@ -20,7 +32,7 @@ export default function Register() {
     formState: { errors },
   } = useForm();
 
-  const onSumbit = (data) => {
+  const onSubmit = (data) => {
     registerUser(data);
     console.log(data);
   };
@@ -28,22 +40,12 @@ export default function Register() {
   const serverError = error?.response?.data?.message;
 
   return (
-    <form onSubmit={handleSubmit(onSumbit)}>
-      <Input
-        type='text'
-        placeholder='Username'
-        label='Username'
-        error={errors}
-        {...register("username", {
-          required: { value: true, message: "Username field is required!" },
-          minLength: { value: 2, message: "Username must be atleast 2 characters!" },
-          maxLength: { value: 50, message: "Username must be less than 50 characters!" },
-        })}
-      />
-      <Password errors={errors} register={register} />
-      {isLoading && "Loading..."}
-      {Boolean(serverError) && <div className='bg-red-600 text-white'>{serverError}</div>}
-      <button className='my-4 border p-2'>Submit</button>
-    </form>
+    <div style={divStyle}>
+    <p className='text-center m-2 w-100 text-3xl font-bold'>Register</p>
+<UserForm serverError={serverError} user={register} onSubmit={onSubmit}
+  handleSubmit={handleSubmit} errors={errors} isLoading={isLoading}
+/>
+<button className='my-4 border p-2 bg-blue-100' onClick={() => {navigateTo('/login');}}>Login</button>
+</div>
   );
 }
