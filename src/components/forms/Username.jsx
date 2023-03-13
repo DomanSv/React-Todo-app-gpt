@@ -5,7 +5,6 @@ export default function Username(props) {
   const { errors, register } = props;
 
   return (
-    <div>
       <Input
         type='text'
         placeholder='Enter Username'
@@ -17,6 +16,5 @@ export default function Username(props) {
           maxLength: { value: 50, message: "Username must be less than 50 characters!" },
         })}
       />
-    </div>
   );
 }
