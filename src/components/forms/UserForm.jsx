@@ -13,7 +13,7 @@ export default function UserForm(props) {
 
   return (
     <form
-      className='z-10 w-full max-w-md rounded-2xl border-2 border-slate-300 bg-cyan-900 px-6 py-12 shadow-xl dark:border-slate-700 dark:bg-slate-900 dark:text-white md:p-'
+      className='z-10 w-full max-w-md rounded-2xl border-2 border-slate-300 bg-cyan-900 px-6 py-12 shadow-xl dark:border-slate-700 dark:bg-slate-900 dark:text-white'
       onSubmit={handleSubmit(onSubmit)}
     >
       <Username errors={errors} register={register} />
