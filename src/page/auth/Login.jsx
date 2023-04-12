@@ -11,7 +11,8 @@ export default function Login() {
     isLoading,
     error,
   } = useLogin({
-    onSuccess: () => {
+    onSuccess: (data) => {
+      localStorage.setItem("token", data.token);
       navigateTo("/");
     },
   });
