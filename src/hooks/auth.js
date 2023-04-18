@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { AuthApi } from "../api";
 
 export function useRegister({ onSuccess }) {
@@ -9,4 +9,9 @@ export function useRegister({ onSuccess }) {
 export function useLogin({ onSuccess }) {
   const { mutate, isLoading, error } = useMutation({ mutationFn: AuthApi.login, onSuccess });
   return { login: mutate, isLoading, error };
+}
+
+export function useAccount({ enabled }) {
+  const { data, isLoading, error } = useQuery(["account"], AuthApi.getAccount, { staleTime: Infinity, cacheTime: Infinity, enabled });
+  return { account: data, isLoading, error };
 }
