@@ -11,7 +11,7 @@ export function useLogin({ onSuccess }) {
   return { login: mutate, isLoading, error };
 }
 
-export async function useAccount({ enabled }) {
+export function useAccount({ enabled }) {
   const { data, isLoading, error } = useQuery(["account"], AuthApi.getAccount, { staleTime: Infinity, cacheTime: Infinity, enabled });
   return { account: data, isLoading, error };
 }

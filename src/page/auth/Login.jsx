@@ -2,9 +2,12 @@ import UserForm from "../../components/forms/UserForm";
 import { useLogin } from "../../hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { Loading } from "../../icons";
+import { useAuth } from "../../context/Auth";
 
 export default function Login() {
   const navigateTo = useNavigate();
+
+  const {setToken} = useAuth();
 
   const {
     login: loginUser,
@@ -13,6 +16,7 @@ export default function Login() {
   } = useLogin({
     onSuccess: (data) => {
       localStorage.setItem("token", data.token);
+      setToken(data.token);
       navigateTo("/");
     },
   });
