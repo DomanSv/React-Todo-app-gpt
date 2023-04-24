@@ -8,7 +8,7 @@ const Greetings = ({ username, isLoading }) => {
   if (isLoading) {
     return (
       <div className='flex justify-center'>
-        <Loading className='h-8 w-8 animate-spin font-bold text-white' />
+        <Loading className='h-8 w-8 animate-spin font-bold text-blue-500' />
       </div>
     );
   }
@@ -18,7 +18,7 @@ const Greetings = ({ username, isLoading }) => {
   else if (hours >= 17 && hours <= 24) greet = "Evening";
 
   return (
-    <p className='text-center font-serif text-3xl font-thin text-gray-200'>
+    <p className='text-center text-3xl font-thin text-gray-500'>
       Good {greet}, {username}!
     </p>
   );
