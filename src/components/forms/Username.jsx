@@ -8,7 +8,7 @@ export default function Username(props) {
     <Input
       type='text'
       placeholder='Enter Username'
-      label={<h1 className=''>Username</h1>}
+      label={<h1 className='dark:text-white'>Username</h1>}
       error={errors}
       {...register("username", {
         required: { value: true, message: "Username field is required!" },

@@ -12,7 +12,7 @@ export default function Password(props) {
       <Input
         type={passVisible ? "text" : "password"}
         placeholder='Enter Password'
-        label={<h1 className=''>Password</h1>}
+        label={<h1 className='mt-2 dark:text-white'>Password</h1>}
         error={errors}
         {...register("password", {
           required: { value: true, message: "Password field is required!" },
@@ -22,7 +22,7 @@ export default function Password(props) {
           },
         })}
       />
-      <button type='button' onClick={() => setPassVisible((v) => !v)} className='text-blue-400 inline-flex'>
+      <button type='button' onClick={() => setPassVisible((v) => !v)} className='mt-1 inline-flex text-blue-400'>
         {passVisible ? <ClosedEye className='h-7 w-7' /> : <Eye className='h-7 w-7' />}
       </button>
     </div>

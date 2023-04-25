@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
 
   const logOut = () => {
     setToken(null);
-    localStorage.clear();
+    localStorage.removeItem("token");
     queryClient.resetQueries();
   };
 
@@ -39,10 +39,10 @@ export function AuthProvider({ children }) {
   );
 }
 
-export function useAuth(){
-    const context = useContext(AuthContext);
-    if(typeof context === "undefined"){
-        throw new Error("useAuth should be used inside AuthProvider!");
-    } 
-    return context;
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (typeof context === "undefined") {
+    throw new Error("useAuth should be used inside AuthProvider!");
+  }
+  return context;
 }
