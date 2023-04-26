@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/Auth";
 import { AccountCircle, DarkMode, ExpandMore, LightMode, Loading, SystemColor } from "../icons";
 
-const NavigationBar = () => {
-  const { account, logOut, isLoading } = useAuth();
-  const username = account?.username;
+const NavigationBar = ({username, isLoading}) => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "system");
+  const {logOut} = useAuth();
   const element = document.documentElement;
   const darkQuery = window.matchMedia("(prefers-color-scheme: dark");
 
@@ -67,24 +66,24 @@ const NavigationBar = () => {
           <div className='ml-2 mr-2 inline-flex justify-center rounded-md bg-blue-300 pb-2 dark:bg-slate-800  dark:text-white'>
             <button
               className={`mt-2 ml-3 mr-3 h-full w-full rounded-md p-1 bg-${
-                theme === "system" ? "blue-500 dark:bg-blue-700 dark:hover:bg-blue-700" : "blue-300 dark:bg-slate-800"
-              } px-2 text-black hover:bg-blue-500 dark:text-white dark:hover:bg-slate-500`}
+                theme === "system" ? "blue-500 dark:bg-blue-700 dark:hover:bg-blue-700" : "blue-300 dark:bg-slate-800 dark:hover:bg-slate-500"
+              } px-2 text-black hover:bg-blue-500 dark:text-white `}
               onClick={() => setTheme("system")}
             >
               <SystemColor className='h-8 w-8' />
             </button>
             <button
               className={`mt-2 h-full w-full rounded-md p-1 bg-${
-                theme === "light" ? "blue-500 dark:bg-blue-700 dark:hover:bg-blue-700" : "blue-300 dark:bg-slate-800"
-              } px-2 text-black hover:bg-blue-500 dark:text-white dark:hover:bg-slate-500`}
+                theme === "light" ? "blue-500" : "blue-300 dark:bg-slate-800 dark:hover:bg-slate-500"
+              } px-2 text-black hover:bg-blue-500 dark:text-white `}
               onClick={() => setTheme("light")}
             >
               <LightMode className='h-8 w-8' />
             </button>
             <button
               className={`mt-2 ml-3 mr-3 h-full w-full rounded-md p-1 bg-${
-                theme === "dark" ? "blue-500 dark:bg-blue-700 dark:hover:bg-blue-700" : "blue-300 dark:bg-slate-800"
-              } px-2 text-black hover:bg-blue-500 dark:text-white dark:hover:bg-slate-500`}
+                theme === "dark" ? "blue-500 dark:bg-blue-700 dark:hover:bg-blue-700" : "blue-300 dark:bg-slate-800 dark:hover:bg-slate-500"
+              } px-2 text-black hover:bg-blue-500 dark:text-white`}
               onClick={() => setTheme("dark")}
             >
               <DarkMode className='h-8 w-8' />

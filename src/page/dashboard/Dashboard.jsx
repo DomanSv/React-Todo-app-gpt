@@ -13,7 +13,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <NavigationBar>username={account?.username}</NavigationBar>
+      <NavigationBar username={account?.username} isLoading={isLoading}/>
       <div className='mt-4 text-center text-9xl font-extrabold text-blue-900 opacity-80 dark:text-white dark:opacity-100'>
         TODO
         <Greetings username={account?.username} isLoading={isLoading} />
