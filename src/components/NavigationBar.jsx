@@ -1,48 +1,9 @@
-import { useEffect, useState } from "react";
 import { useAuth } from "../context/Auth";
 import { AccountCircle, DarkMode, ExpandMore, LightMode, Loading, SystemColor } from "../icons";
 
 const NavigationBar = ({username, isLoading}) => {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "system");
+  const {theme, setTheme} = useAuth();
   const {logOut} = useAuth();
-  const element = document.documentElement;
-  const darkQuery = window.matchMedia("(prefers-color-scheme: dark");
-
-  function onWindowMatch() {
-    if (localStorage.theme === "dark" || (!("theme" in localStorage) && darkQuery.matches)) {
-      element.classList.add("dark");
-    } else {
-      element.classList.remove("dark");
-    }
-  }
-  onWindowMatch();
-
-  useEffect(() => {
-    switch (theme) {
-      case "dark":
-        element.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-        break;
-      case "light":
-        element.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-        break;
-      default:
-        localStorage.removeItem("theme");
-        onWindowMatch();
-        break;
-    }
-  }, [theme]);
-
-  darkQuery.addEventListener("change", (e) => {
-    if (!("theme" in localStorage)) {
-      if (e.matches) {
-        element.classList.add("dark");
-      } else {
-        element.classList.remove("dark");
-      }
-    }
-  });
 
   return (
     <nav className='sticky top-0 z-10 h-14 bg-blue-500 bg-opacity-75 px-4 shadow-lg dark:bg-slate-600'>
