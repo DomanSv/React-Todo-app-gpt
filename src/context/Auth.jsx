@@ -1,25 +1,16 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useAccount } from "../hooks";
+import { createContext, useContext } from "react";
+import { useAccount, useLocalStorage } from "../hooks";
 import { useQueryClient } from "@tanstack/react-query";
-import { getStoredToken } from "../utils/helperfuncs";
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const queryClient = useQueryClient();
-  const [token, setToken] = useState(null);
+  const [token, setToken, removeToken] = useLocalStorage("token");
   const { account, isLoading } = useAccount({ enabled: Boolean(token) });
 
-  useEffect(() => {
-    const storedToken = getStoredToken();
-    if (storedToken) {
-      setToken(storedToken);
-    }
-  }, []);
-
   const logOut = () => {
-    setToken(null);
-    localStorage.clear();
+    removeToken();
     queryClient.resetQueries();
   };
 
@@ -39,10 +30,10 @@ export function AuthProvider({ children }) {
   );
 }
 
-export function useAuth(){
-    const context = useContext(AuthContext);
-    if(typeof context === "undefined"){
-        throw new Error("useAuth should be used inside AuthProvider!");
-    } 
-    return context;
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (typeof context === "undefined") {
+    throw new Error("useAuth should be used inside AuthProvider!");
+  }
+  return context;
 }

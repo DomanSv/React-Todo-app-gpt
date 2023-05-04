@@ -7,7 +7,7 @@ import { useAuth } from "../../context/Auth";
 export default function Login() {
   const navigateTo = useNavigate();
 
-  const {setToken} = useAuth();
+  const { setToken } = useAuth();
 
   const {
     login: loginUser,
@@ -28,16 +28,16 @@ export default function Login() {
   const serverError = error?.response?.data?.message;
 
   return (
-    <div className='relative isolate mx-auto mt-6 grid h-full w-full max-w-4xl place-items-center space-y-4 bg-sky-500'>
+    <div className='relative isolate mx-auto mt-6 grid h-full w-full max-w-4xl place-items-center space-y-4 rounded-lg border-2 border-dashed border-blue-900 bg-blue-500 bg-opacity-50 pb-5 pt-4 dark:border-white dark:bg-slate-500'>
       <p className='w-100 m-2 text-center text-3xl font-bold'>Login</p>
       <UserForm onSubmit={onSubmit}>
-        {Boolean(serverError) && <div className='mb-2 rounded-md bg-red-600 text-white'>{serverError}</div>}
-        {isLoading && <Loading className='m-2 h-8 w-8 animate-spin font-bold text-white' />}
-        <button className='relative inline-flex w-full select-none items-center justify-center gap-1 rounded-md border-2 border-transparent bg-cyan-500 py-4 px-6 text-base font-semibold leading-none text-white outline-none ring-cyan-600 ring-offset-2 transition-all hover:bg-cyan-600 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:ring-offset-slate-900 sm:w-auto'>
+        {Boolean(serverError) && <div className='mb-2 rounded-md bg-red-600'>{serverError}</div>}
+        {isLoading && <Loading className='m-2 h-8 w-8 animate-spin font-bold text-blue-500 dark:text-white' />}
+        <button className='ring-vlue-600 relative inline-flex w-full select-none items-center justify-center gap-1 rounded-md border-2 border-transparent bg-blue-500 py-4 px-6 text-base font-semibold leading-none text-white outline-none ring-offset-2 transition-all hover:bg-blue-600 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:ring-offset-slate-900 sm:w-auto'>
           Login
         </button>
       </UserForm>
-      <h1>
+      <h1 className='dark:text-white'>
         Don&apos;t have an account?{" "}
         <Link className='underline' to='/register'>
           Sign up
