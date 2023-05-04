@@ -1,54 +1,32 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { usePreferedTheme } from "../hooks/theme";
+import { createContext, useContext, useEffect } from "react";
+import { useLocalStorage, useMedia } from "../hooks";
 
 export const ThemeContext = createContext();
+const htmlElement = document.documentElement;
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "system");
-  const element = document.documentElement;
-  const darkQuery = usePreferedTheme();
-
-  function onWindowMatch() {
-    if (localStorage.theme === "dark" || (!("theme" in localStorage) && darkQuery.matches)) {
-      element.classList.add("dark");
-    } else {
-      element.classList.remove("dark");
-    }
-  }
-  onWindowMatch();
+  const [theme, setTheme, resetTheme] = useLocalStorage("theme", "system");
+  const darkQuery = useMedia("(prefers-color-scheme: dark");
 
   useEffect(() => {
-    switch (theme) {
-      case "dark":
-        element.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-        break;
-      case "light":
-        element.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-        break;
-      default:
-        localStorage.removeItem("theme");
-        onWindowMatch();
-        break;
+    if (theme === "dark") {
+      return htmlElement.classList.add("dark");
     }
-  }, [theme]);
-
-  darkQuery.addEventListener("change", (e) => {
-    if (!("theme" in localStorage)) {
-      if (e.matches) {
-        element.classList.add("dark");
-      } else {
-        element.classList.remove("dark");
-      }
+    if (theme === "light") {
+      return htmlElement.classList.remove("dark");
     }
-  });
+    if (darkQuery) {
+      return htmlElement.classList.add("dark");
+    }
+    return htmlElement.classList.remove("dark");
+  }, [theme, darkQuery]);
 
   return (
     <ThemeContext.Provider
       value={{
         theme,
         setTheme,
+        resetTheme,
       }}
     >
       {children}
