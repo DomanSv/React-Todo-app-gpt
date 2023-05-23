@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/Auth";
-import { useTheme } from "../context/Theme";
 import { AccountCircle, DarkMode, ExpandMore, LightMode, Loading, SystemColor } from "../icons";
 
 const NavigationBar = ({ username, isLoading }) => {
@@ -57,7 +57,7 @@ const NavigationBar = ({ username, isLoading }) => {
           </div>
 
           <button
-            className='outline-non mt-3 mb-3 mr-3 ml-3 inline-flex w-full select-none justify-center gap-1 rounded-md border-2 border-transparent bg-red-500 py-1 px-3 text-base font-semibold leading-none text-white transition-all hover:bg-red-600 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:ring-offset-slate-900 sm:w-auto'
+            className='outline-non mt-3 mb-3 mr-3 ml-3 inline-flex select-none justify-center gap-1 rounded-md border-2 border-transparent bg-red-500 py-1 px-3 text-base font-semibold leading-none text-white transition-all hover:bg-red-600 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:ring-offset-slate-900 sm:w-auto'
             onClick={logOut}
           >
             Log Out

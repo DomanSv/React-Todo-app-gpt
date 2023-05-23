@@ -1,15 +1,14 @@
 import { Navigate, useNavigate } from "react-router-dom";
 import Greetings from "../../components/Greetings";
-import { getStoredToken } from "../../utils/helperfuncs";
 import { useAuth } from "../../context/Auth";
 import NavigationBar from "../../components/NavigationBar";
 
 export default function Dashboard() {
-  const { authenticated, isLoading, account } = useAuth();
+  const { authenticated, isLoading, account, token } = useAuth();
 
   const navigateTo = useNavigate();
 
-  if (!authenticated && !getStoredToken()) {
+  if (!authenticated && !token) {
     return <Navigate to='/login' />;
   }
 

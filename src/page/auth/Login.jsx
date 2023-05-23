@@ -8,6 +8,7 @@ export default function Login() {
   const navigateTo = useNavigate();
 
   const { setToken } = useAuth();
+  
 
   const {
     login: loginUser,
@@ -15,7 +16,6 @@ export default function Login() {
     error,
   } = useLogin({
     onSuccess: (data) => {
-      localStorage.setItem("token", data.token);
       setToken(data.token);
       navigateTo("/");
     },
