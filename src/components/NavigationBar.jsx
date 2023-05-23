@@ -10,6 +10,7 @@ const NavigationBar = ({ username, isLoading }) => {
     <nav className='sticky top-0 z-10 h-14 bg-blue-500 bg-opacity-75 px-4 shadow-lg transition-all dark:bg-slate-600'>
       <div className='mx-auto h-full w-full max-w-4xl space-x-2'>
         <button className='outline-non dark:hover-bg-indigo-700 peer relative mt-2 ml-1 inline-flex w-full select-none justify-center gap-1 rounded-md border-2 border-blue-900 bg-gray-200 py-1 px-3 text-base font-semibold leading-none text-blue-900 ring-offset-2 transition-all hover:bg-gray-300 dark:hover:bg-indigo-700 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-400 dark:bg-indigo-600 dark:text-white sm:w-auto'>
+        <button className='outline-non dark:hover-bg-indigo-700 peer relative mt-2 ml-1 inline-flex w-full select-none justify-center gap-1 rounded-md border-2 border-blue-900 bg-gray-200 py-1 px-3 text-base font-semibold leading-none text-blue-900 ring-offset-2 transition-all hover:bg-gray-300 dark:hover:bg-indigo-700 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-400 dark:bg-indigo-600 dark:text-white sm:w-auto'>
           {isLoading ? (
             <Loading className='h-5 w-5 animate-spin font-extrabold text-blue-900 dark:text-white' />
           ) : (
@@ -31,6 +32,9 @@ const NavigationBar = ({ username, isLoading }) => {
                 theme === "system"
                   ? "blue-500 dark:bg-indigo-600 dark:hover:bg-indigo-600"
                   : "blue-300 dark:bg-slate-800 dark:hover:bg-slate-500"
+                theme === "system"
+                  ? "blue-500 dark:bg-indigo-600 dark:hover:bg-indigo-600"
+                  : "blue-300 dark:bg-slate-800 dark:hover:bg-slate-500"
               } px-2 text-black hover:bg-blue-500 dark:text-white `}
               onClick={() => setTheme("system")}
             >
@@ -46,6 +50,9 @@ const NavigationBar = ({ username, isLoading }) => {
             </button>
             <button
               className={`mt-2 ml-3 mr-3 h-full w-full rounded-md p-1 bg-${
+                theme === "dark"
+                  ? "blue-500 dark:bg-indigo-600 dark:hover:bg-indigo-600"
+                  : "blue-300 dark:bg-slate-800 dark:hover:bg-slate-500"
                 theme === "dark"
                   ? "blue-500 dark:bg-indigo-600 dark:hover:bg-indigo-600"
                   : "blue-300 dark:bg-slate-800 dark:hover:bg-slate-500"
