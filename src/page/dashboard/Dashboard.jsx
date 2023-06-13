@@ -1,5 +1,4 @@
 import { Navigate, useNavigate } from "react-router-dom";
-import { Navigate, useNavigate } from "react-router-dom";
 import Greetings from "../../components/Greetings";
 import { useAuth } from "../../context/Auth";
 import NavigationBar from "../../components/NavigationBar";
@@ -16,9 +15,7 @@ export default function Dashboard() {
   return (
     <div>
       <NavigationBar username={account?.username} isLoading={isLoading} />
-      <div className='mt-4 text-center text-9xl font-extrabold text-indigo-700 opacity-90 dark:text-white dark:opacity-100'>
-      <NavigationBar username={account?.username} isLoading={isLoading} />
-      <div className='mt-4 text-center text-9xl font-extrabold text-indigo-700 opacity-90 dark:text-white dark:opacity-100'>
+      <div className='mt-4 text-center text-9xl font-extrabold text-indigo-700 opacity-90 dark:text-white dark:opacity-100 transition-all'>
         TODO
         <Greetings username={account?.username} isLoading={isLoading} />
       </div>

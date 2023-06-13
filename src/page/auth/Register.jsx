@@ -18,7 +18,6 @@ export default function Register() {
 
   const onSubmit = (data) => {
     registerUser(data);
-    console.log(data);
   };
 
   const serverError = error?.response?.data?.message;

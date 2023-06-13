@@ -1,21 +1,44 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import NavigationBar from "../../components/NavigationBar";
 import { useAuth } from "../../context/Auth";
+import { useAddTodo } from "../../hooks";
+import TodoForm from "../../components/forms/todoForm";
 
 export default function addTodo() {
-  const { isLoading, account } = useAuth();
+  const { authenticated, isLoading, account, token } = useAuth();
   const navigateTo = useNavigate();
+
+  if (!authenticated && !token) {
+    return <Navigate to='/login' />;
+  }
+
+  const { addTodo: todo, error } = useAddTodo({
+    onSuccess: (data) => {
+      console.log(data);
+      navigateTo("/");
+    },
+  });
+
+  const serverError = error?.response?.data?.message;
 
   return (
     <div>
       <NavigationBar username={account?.username} isLoading={isLoading} />
-      <div className='relative isolate mx-auto mt-6 grid h-full w-full max-w-4xl place-items-center space-y-4 rounded-lg border-2 border-dashed border-blue-900 bg-indigo-200 pb-5 pt-4 dark:border-white dark:bg-slate-500'>
-        <button
-          className='outline-non peer relative mt-2 ml-1 inline-flex w-full select-none justify-center gap-1 rounded-md  bg-red-500 py-3 px-4 text-base font-semibold leading-none text-white ring-offset-2 transition-all hover:bg-red-600 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto'
-          onClick={() => navigateTo("/")}
-        >
-          Cancel
-        </button>
+      <div className='relative isolate mx-auto mt-6 grid h-full w-full max-w-4xl place-items-center space-y-4 rounded-lg border-2 border-dashed border-blue-900 bg-slate-300 bg-opacity-50 pb-5 pt-4 transition-all dark:border-white dark:bg-slate-800'>
+        <TodoForm todo={todo}>
+          {Boolean(serverError) && <div className='mb-2 rounded-md bg-red-600 text-center text-white'>{serverError}</div>}
+          <div className='mt-3 flex justify-end'>
+            <button type='button'
+              className='mr-3 relative inline-flex select-none justify-center gap-1 rounded-md bg-red-500 py-3 px-4 text-base font-semibold leading-none text-white outline-none ring-offset-2 transition-all hover:bg-red-600 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto'
+              onClick={() => navigateTo("/")}
+            >
+              Cancel
+            </button>
+            <button className='peer relative flex select-none justify-center gap-1 rounded-md bg-indigo-500 py-3 px-4 text-base font-semibold leading-none text-white outline-none ring-offset-2 transition-all hover:bg-indigo-600 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto'>
+              Create
+            </button>
+          </div>
+        </TodoForm>
       </div>
     </div>
   );
