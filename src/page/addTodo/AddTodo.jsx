@@ -24,7 +24,7 @@ export default function addTodo() {
   return (
     <div>
       <NavigationBar username={account?.username} isLoading={isLoading} />
-      <div className='relative isolate mx-auto mt-6 grid h-full w-full max-w-4xl place-items-center space-y-4 rounded-lg border-2 border-dashed border-blue-900 bg-slate-300 bg-opacity-50 pb-5 pt-4 transition-all dark:border-white dark:bg-slate-800'>
+      <div className='relative isolate mx-auto mt-6 grid h-full w-full max-w-4xl place-items-center space-y-4 rounded-lg border-2 border-dashed border-blue-900 bg-slate-300 bg-opacity-60 pb-5 pt-4 transition-all dark:border-white dark:bg-slate-800 dark:bg-opacity-50'>
         <TodoForm todo={todo}>
           {Boolean(serverError) && <div className='mb-2 rounded-md bg-red-600 text-center text-white'>{serverError}</div>}
           <div className='mt-3 flex justify-end'>

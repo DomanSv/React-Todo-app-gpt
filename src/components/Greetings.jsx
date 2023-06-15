@@ -18,7 +18,7 @@ const Greetings = ({ username, isLoading }) => {
   else if (hours >= 17 && hours <= 24) greet = "Evening";
 
   return (
-    <p className='text-center text-3xl font-thin text-gray-500 dark:text-gray-300'>
+    <p className='text-center text-3xl font-normal dark:font-thin text-gray-800 dark:text-gray-300 transition-all'>
       Good {greet}, {username}!
     </p>
   );

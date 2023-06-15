@@ -15,7 +15,7 @@ export default function Dashboard() {
   return (
     <div>
       <NavigationBar username={account?.username} isLoading={isLoading} />
-      <div className='mt-4 text-center text-9xl font-extrabold text-indigo-700 opacity-90 dark:text-white dark:opacity-100 transition-all'>
+      <div className=' mt-4 text-center text-9xl font-extrabold text-indigo-600 bg-clip-text dark:text-indigo-500 transition-all'>
         TODO
         <Greetings username={account?.username} isLoading={isLoading} />
       </div>

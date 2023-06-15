@@ -7,15 +7,15 @@ const NavigationBar = ({ username, isLoading }) => {
   const { logOut } = useAuth();
 
   return (
-    <nav className='sticky top-0 z-10 h-14 bg-blue-500 bg-opacity-75 px-4 shadow-lg transition-all dark:bg-slate-600'>
+    <nav className='sticky top-0 z-10 h-14 bg-blue-500 bg-opacity-75 px-4 shadow-lg transition-all dark:bg-slate-600 dark:bg-opacity-50'>
       <div className='mx-auto h-full w-full max-w-4xl space-x-2'>
-        <button className='outline-non dark:hover-bg-indigo-700 peer relative mt-2 ml-1 inline-flex w-full select-none justify-center gap-1 rounded-md border-2 border-blue-900 bg-gray-200 py-1 px-3 text-base font-semibold leading-none text-blue-900 ring-offset-2 transition-all hover:bg-indigo-200 dark:hover:bg-indigo-700 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-400 dark:bg-indigo-600 dark:text-white sm:w-auto'>
+        <button className='outline-non peer relative mt-2 ml-1 inline-flex w-full select-none justify-center gap-1 rounded-md border-2 border-slate-300 bg-ingigo-600 py-1 px-3 text-base font-semibold leading-none text-white ring-offset-2 transition-all hover:bg-indigo-700 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 bg-indigo-600 dark:hover:bg-indigo-700 sm:w-auto'>
           {isLoading ? (
-            <Loading className='h-5 w-5 animate-spin font-extrabold text-blue-900 dark:text-white' />
+            <Loading className='h-5 w-5 animate-spin font-extrabold text-white' />
           ) : (
             <div className='inline-flex'>
-              <AccountCircle className='mr-2 h-7 w-7 text-blue-900 dark:text-white' /> <p className='text-xl'>{username}</p>
-              <ExpandMore className='ml-1 h-7 w-7 text-blue-900 dark:text-white' />
+              <AccountCircle className='mr-2 h-7 w-7 text-slate-200' /> <p className='text-xl'>{username}</p>
+              <ExpandMore className='ml-1 h-7 w-7 text-white' />
             </div>
           )}
         </button>
