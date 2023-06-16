@@ -3,12 +3,7 @@ import Input from "./Input";
 import { Close } from "../../icons";
 
 export default function TodoForm(props) {
-  const { children, todo } = props;
-
-  const onSubmit = (data) => {
-    console.log(data);
-    todo(data);
-  };
+  const { children, onSubmit } = props;
 
   const {
     register,
