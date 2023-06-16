@@ -12,7 +12,7 @@ export default function addTodo() {
     return <Navigate to='/login' />;
   }
 
-  const { addTodo: todo, error } = useAddTodo({
+  const { addTodo, error } = useAddTodo({
     onSuccess: (data) => {
       console.log(data);
       navigateTo("/");
@@ -21,7 +21,7 @@ export default function addTodo() {
 
   const onSubmit = (data) => {
     console.log(data);
-    todo(data);
+    addTodo(data);
   };
 
   const serverError = error?.response?.data?.message;
