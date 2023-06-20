@@ -8,6 +8,7 @@ export default function Login() {
   const navigateTo = useNavigate();
 
   const { setToken } = useAuth();
+  
 
   const {
     login: loginUser,
@@ -15,7 +16,6 @@ export default function Login() {
     error,
   } = useLogin({
     onSuccess: (data) => {
-      localStorage.setItem("token", data.token);
       setToken(data.token);
       navigateTo("/");
     },
@@ -32,8 +32,8 @@ export default function Login() {
       <p className='w-100 m-2 text-center text-3xl font-bold'>Login</p>
       <UserForm onSubmit={onSubmit}>
         {Boolean(serverError) && <div className='mb-2 rounded-md bg-red-600'>{serverError}</div>}
-        {isLoading && <Loading className='m-2 h-8 w-8 animate-spin font-bold text-blue-500 dark:text-white' />}
-        <button className='ring-vlue-600 relative inline-flex w-full select-none items-center justify-center gap-1 rounded-md border-2 border-transparent bg-blue-500 py-4 px-6 text-base font-semibold leading-none text-white outline-none ring-offset-2 transition-all hover:bg-blue-600 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:ring-offset-slate-900 sm:w-auto'>
+        {isLoading && <Loading className='m-2 h-8 w-8 animate-spin font-bold text-blue-600 dark:text-white' />}
+        <button className='relative inline-flex w-full select-none items-center justify-center gap-1 rounded-md border-2 border-transparent bg-blue-500 py-4 px-6 text-base font-semibold leading-none text-white outline-none ring-offset-2 transition-all hover:bg-blue-600 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:ring-offset-slate-900 sm:w-auto'>
           Login
         </button>
       </UserForm>
