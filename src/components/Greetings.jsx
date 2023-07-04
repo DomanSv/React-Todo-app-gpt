@@ -8,7 +8,7 @@ const Greetings = ({ username, isLoading }) => {
   if (isLoading) {
     return (
       <div className='flex justify-center'>
-        <Loading className='h-8 w-8 animate-spin font-bold text-blue-500 dark:text-white' />
+        <Loading className='h-8 w-8 animate-spin font-bold text-indigo-600 dark:text-white' />
       </div>
     );
   }

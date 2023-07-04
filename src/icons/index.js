@@ -7,3 +7,4 @@ export { ReactComponent as LightMode } from "./light_mode.svg";
 export { ReactComponent as DarkMode } from "./dark_mode.svg";
 export { ReactComponent as SystemColor } from "./colorize.svg";
 export { ReactComponent as Close } from "./x.svg";
+export { ReactComponent as Edit } from "./edit.svg";

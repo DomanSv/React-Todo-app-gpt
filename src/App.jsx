@@ -15,7 +15,7 @@ export default function App() {
             <Route path='/login' element={<Login />} />
             <Route index element={<Dashboard />} />
             <Route path='/add' element={<AddTodo />} />
-          <Route path='*' element={<>Not Found 404</>} />
+            <Route path='*' element={<>Not Found 404</>} />
           </Routes>
         </ThemeProvider>
       </AuthProvider>

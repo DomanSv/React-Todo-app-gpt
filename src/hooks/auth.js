@@ -21,3 +21,8 @@ export function useAddTodo({ onSuccess }) {
   return { addTodo: mutate, isLoading, error };
 }
 
+export function useTodos() {
+  const { data, isLoading, error } = useQuery(["todos"], AuthApi.getTodos);
+  return { todos: data, tasksIsLoading: isLoading, error };
+}
+
