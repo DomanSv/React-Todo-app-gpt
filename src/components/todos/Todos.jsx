@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Priority from "./Priority";
 import SubtaskDropdown from "./SubtaskDropdown";
 import { Close, Edit } from "../../icons";
+import { useDeleteTodo } from "../../hooks";
+import { useQueryClient } from "@tanstack/react-query";
 
-const Todos = ({ todos }) => {
+const Todos = ({ todos, isFetchingTodos }) => {
   const [checkedTodos, setCheckedTodos] = useState([]);
+  const queryClient = useQueryClient();
+  const deletingTodoRef = useRef();
+
+  const { deleteTodo, isLoading } = useDeleteTodo({
+    onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
+    },
+  });
 
   const handleCheckboxChange = (todoId) => {
     if (checkedTodos.includes(todoId)) {
@@ -23,15 +33,19 @@ const Todos = ({ todos }) => {
   }
 
   return (
-    <div className='isolate m-4 mx-auto h-full w-full max-w-4xl place-items-center space-y-7 pt-4 font-sans text-xl transition-all'>
+    <div
+      className={`${
+        isFetchingTodos ? "pointer-events-none opacity-50" : ""
+      } isolate m-4 mx-auto h-full w-full max-w-4xl place-items-center space-y-7 pt-4 font-sans text-xl transition-all`}
+    >
       {todos.data.map((todo) => (
         <div
           className={`isolate mx-auto h-full w-full max-w-4xl rounded-lg border-2 border-slate-300 bg-white transition-all dark:border-slate-500 dark:bg-slate-800 dark:text-white ${
             checkedTodos.includes(todo.id) ? "border-green-600 dark:border-green-500" : ""
-          }`}
+          } ${isLoading && deletingTodoRef.current === todo.id ? "pointer-events-none opacity-50" : ""}`}
           key={todo.id}
         >
-          <div className='relative p-4 flex items-center justify-between'>
+          <div className='relative flex items-center justify-between p-4'>
             <div className='flex items-center'>
               <Priority priority={todo.priority} />
               <input
@@ -49,17 +63,27 @@ const Todos = ({ todos }) => {
               </p>
             </div>
             <div className='flex items-center'>
-              <button type='button' className='ml-2 h-10 rounded-md bg-orange-500 hover:bg-orange-600 pl-2 pr-3 text-lg text-white'>
+              <button
+                type='button'
+                className='ml-2 h-10 rounded-md bg-orange-500 pl-2 pr-3 text-lg text-white hover:bg-orange-600 active:scale-95'
+              >
                 <div className='flex'>
-                <Edit className='h-7 w-7 pr-1'/> Edit
+                  <Edit className='h-7 w-7 pr-1' /> Edit
                 </div>
               </button>
-              <button type='button' className='ml-2 h-10 rounded-md bg-red-500 hover:bg-red-600 pl-3 pr-3 text-lg text-white'>
+              <button
+                type='button'
+                onClick={() => {
+                  deletingTodoRef.current = todo.id;
+                  deleteTodo(todo.id);
+                }}
+                className='ml-2 h-10 rounded-md bg-red-500 pl-3 pr-3 text-lg text-white hover:bg-red-600 active:scale-95'
+              >
                 <Close />
               </button>
             </div>
           </div>
-          {todo.description && <p className='pl-12 pb-4'>{todo.description}</p> }  
+          {todo.description && <p className='pl-12 pb-4'>{todo.description}</p>}
           {todo.subTasks.length > 0 && <SubtaskDropdown subtasks={todo.subTasks} />}
         </div>
       ))}

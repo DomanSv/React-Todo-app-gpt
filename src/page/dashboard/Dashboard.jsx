@@ -8,7 +8,7 @@ import Todos from "../../components/todos/Todos";
 
 export default function Dashboard() {
   const { authenticated, isLoading, account, token } = useAuth();
-  const { todos, tasksIsLoading } = useTodos();  
+  const { todos, tasksIsLoading, tasksIsFetching } = useTodos();  
 
   if (!authenticated && !token) {
     return <Navigate to='/login' />;
@@ -37,7 +37,7 @@ export default function Dashboard() {
           <Loading className='h-10 w-10 animate-spin font-extrabold text-indigo-600 dark:text-white' />
         </div>
       ) : (
-        <Todos todos={todos}/>
+        <Todos todos={todos} isFetchingTodos={tasksIsFetching}/>
       )}
     </div>
   );

@@ -22,7 +22,11 @@ export function useAddTodo({ onSuccess }) {
 }
 
 export function useTodos() {
-  const { data, isLoading, error } = useQuery(["todos"], AuthApi.getTodos);
-  return { todos: data, tasksIsLoading: isLoading, error };
+  const { data, isLoading, isFetching, error } = useQuery(["todos"], AuthApi.getTodos);
+  return { todos: data, tasksIsLoading: isLoading, tasksIsFetching: isFetching,  error };
 }
 
+export function useDeleteTodo({onSuccess}) {
+  const { mutate, isLoading, error } = useMutation({mutationFn: AuthApi.deleteTodo, onSuccess});
+  return { deleteTodo: mutate, isLoading, error };
+}
