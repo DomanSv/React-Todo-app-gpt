@@ -8,7 +8,6 @@ export default function addTodo() {
   const { authenticated, isLoading, account, token } = useAuth();
   const navigateTo = useNavigate();
 
-
   if (!authenticated && !token) {
     return <Navigate to='/login' />;
   }

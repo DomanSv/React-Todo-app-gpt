@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import Username from "./Username";
 
 export default function UserForm(props) {
-  const { onSubmit, title , children } = props;
+  const { onSubmit, title, children } = props;
 
   const {
     register,

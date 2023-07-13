@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Subtasks from './SubTasks';
+import React, { useState } from "react";
+import Subtasks from "./SubTasks";
 
 const SubtaskDropdown = ({ subtasks }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -9,9 +9,9 @@ const SubtaskDropdown = ({ subtasks }) => {
   };
 
   return (
-    <div className='ml-6 mr-6 mb-4 bg-slate-200 dark:bg-slate-900 rounded-lg'>
-      <button className='w-full px-4 py-2 rounded-lg p-2 text-white bg-indigo-600 text-sm font-semibold' onClick={toggleDropdown}>
-        {isExpanded ? 'Hide Subtasks' : `Show ${subtasks.length} Subtasks`}
+    <div className='ml-6 mr-6 mb-4 rounded-lg bg-slate-200 dark:bg-slate-900'>
+      <button className='w-full rounded-lg bg-indigo-600 p-2 px-4 py-2 text-sm font-semibold text-white' onClick={toggleDropdown}>
+        {isExpanded ? "Hide Subtasks" : `Show ${subtasks.length} Subtasks`}
       </button>
       {isExpanded && <Subtasks subtasks={subtasks} />}
     </div>

@@ -15,7 +15,7 @@ function Input(props, ref) {
           {...rest}
           ref={ref}
         />
-        {inputError && <span className='text-red-500 font-semibold'>{inputError}</span>}
+        {inputError && <span className='font-semibold text-red-500'>{inputError}</span>}
       </label>
     </div>
   );

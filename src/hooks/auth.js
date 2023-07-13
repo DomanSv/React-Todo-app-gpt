@@ -23,10 +23,10 @@ export function useAddTodo({ onSuccess }) {
 
 export function useTodos() {
   const { data, isLoading, isFetching, error } = useQuery(["todos"], TodoApi.getTodos);
-  return { todos: data, tasksIsLoading: isLoading, tasksIsFetching: isFetching,  error };
+  return { todos: data, tasksIsLoading: isLoading, tasksIsFetching: isFetching, error };
 }
 
-export function useDeleteTodo({onSuccess}) {
-  const { mutate, isLoading, error } = useMutation({mutationFn: TodoApi.deleteTodo, onSuccess});
+export function useDeleteTodo({ onSuccess }) {
+  const { mutate, isLoading, error } = useMutation({ mutationFn: TodoApi.deleteTodo, onSuccess });
   return { deleteTodo: mutate, isLoading, error };
 }

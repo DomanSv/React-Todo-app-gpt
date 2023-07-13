@@ -27,8 +27,8 @@ const Todos = ({ todos, isFetchingTodos }) => {
   if (todos.data.length === 0) {
     return (
       <div className='mx-auto mt-1 flex justify-center'>
-        <span className='font-mono font-semibold text-xl transition-all dark:text-white'>Start by adding some tasks!</span>
-        <CurvedArrow className='-translate-y-3 inline h-12 w-12 rotate-90 skew-x-12 -scale-x-100 transform transition-all text-orange-500' />
+        <span className='font-mono text-xl font-semibold transition-all dark:text-white'>Start by adding some tasks!</span>
+        <CurvedArrow className='inline h-12 w-12 -translate-y-3 rotate-90 skew-x-12 -scale-x-100 transform text-orange-500 transition-all' />
       </div>
     );
   }
