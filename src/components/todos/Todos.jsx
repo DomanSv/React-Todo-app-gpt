@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import Priority from "./Priority";
 import SubtaskDropdown from "./SubtaskDropdown";
-import { Close, Edit } from "../../icons";
+import { Close, CurvedArrow, Edit } from "../../icons";
 import { useDeleteTodo } from "../../hooks";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -26,8 +26,9 @@ const Todos = ({ todos, isFetchingTodos }) => {
 
   if (todos.data.length === 0) {
     return (
-      <div className='relative isolate mx-auto mt-6 grid h-full w-full max-w-4xl place-items-center space-y-4 pb-5 pt-4 font-mono text-xl transition-all dark:text-white'>
-        Looks like there are no tasks! Chilling time!😎
+      <div className='mx-auto mt-1 flex justify-center'>
+        <span className='font-mono font-semibold text-xl transition-all dark:text-white'>Start by adding some tasks!</span>
+        <CurvedArrow className='-translate-y-3 inline h-12 w-12 rotate-90 skew-x-12 -scale-x-100 transform transition-all text-orange-500' />
       </div>
     );
   }
