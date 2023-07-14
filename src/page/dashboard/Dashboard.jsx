@@ -24,20 +24,20 @@ export default function Dashboard() {
       <div className='mx-auto mt-5 max-w-fit px-12 py-3'>
         <button
           tabIndex={-1}
-          className='mr-4 w-full select-none space-x-2 rounded-md bg-indigo-600 py-4 px-4 text-lg font-semibold leading-none text-white transition-all hover:bg-indigo-700 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto'
+          className='mr-4 w-full select-none space-x-2 rounded-md border-2 border-indigo-500 bg-white bg-opacity-60 py-4 px-4 text-lg font-semibold leading-none transition-all hover:bg-indigo-200 hover:bg-opacity-50 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-500 dark:bg-opacity-30 dark:text-white dark:hover:bg-indigo-700 dark:hover:bg-opacity-50 sm:w-auto'
         >
           Filter Status
         </button>
         <button
           tabIndex={-1}
-          className='ml-4 mr-4 w-full select-none space-x-2 rounded-md bg-indigo-600 py-4 px-4 text-lg font-semibold leading-none text-white transition-all hover:bg-indigo-700 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto'
+          className='ml-4 mr-4 w-full select-none space-x-2 rounded-md border-2 border-indigo-500 bg-white bg-opacity-60 py-4 px-4 text-lg font-semibold leading-none transition-all hover:bg-indigo-200 hover:bg-opacity-50 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-500 dark:bg-opacity-30 dark:text-white dark:hover:bg-indigo-700 dark:hover:bg-opacity-50 sm:w-auto'
         >
           Filter Priority
         </button>
         <Link to='/add'>
           <button
             tabIndex={-1}
-            className='ml-4 w-full select-none space-x-2 rounded-lg border-2 border-orange-500 bg-indigo-600 py-4 px-4 text-lg font-semibold leading-none text-white transition-all hover:bg-indigo-700 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto'
+            className='ml-4 w-full select-none space-x-2 rounded-lg bg-indigo-600 py-4 px-4 text-lg font-semibold leading-none text-white transition-all hover:bg-indigo-700 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto'
           >
             + Add Todo
           </button>
