@@ -82,7 +82,7 @@ const Todos = ({ todos, isFetchingTodos }) => {
             </div>
           </div>
           {todo.description && <p className='pl-12 pb-4'>{todo.description}</p>}
-          {todo.subTasks.length > 0 && <SubtaskDropdown subtasks={todo.subTasks} />}
+          {todo.subTasks.length > 0 && <SubtaskDropdown todo={todo} />}
         </div>
       ))}
     </div>
