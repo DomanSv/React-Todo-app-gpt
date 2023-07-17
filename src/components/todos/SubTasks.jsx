@@ -20,7 +20,7 @@ const Subtasks = ({ todo }) => {
               className='ml-1 h-3 w-3 cursor-pointer rounded-lg border-2 border-slate-300 bg-slate-100 outline-none !ring-green-600 ring-offset-2 transition-all checked:text-green-600 hover:bg-slate-200 checked:hover:text-green-700 focus:ring dark:border-slate-500 dark:bg-slate-600 dark:ring-offset-slate-900 dark:checked:border-green-600 dark:checked:bg-green-600 dark:hover:bg-slate-700 dark:checked:hover:border-green-700 dark:checked:hover:bg-green-700 md:h-5 md:w-5'
               type='checkbox'
               checked={subtask.done}
-              onChange={() => {    
+              onChange={() => {
                 subtask.done = !subtask.done;
                 editTodo(todo);
               }}
@@ -32,8 +32,9 @@ const Subtasks = ({ todo }) => {
               type='button'
               className='h-8 w-8 rounded-md bg-red-500 pl-1 text-white hover:bg-red-600 '
               onClick={() => {
-                todo.subTasks.splice(subtask,1);
-                editTodo(todo);
+                const updatedSubTasks = todo.subTasks.filter((subtaskFromList) => subtaskFromList.id !== subtask.id);
+                const updatedTodo = { ...todo, subTasks: updatedSubTasks };
+                editTodo(updatedTodo);
               }}
             >
               <Close />
