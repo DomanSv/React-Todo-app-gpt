@@ -5,7 +5,7 @@ const SubtaskDropdown = ({ todo }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleDropdown = () => {
-    setIsExpanded(!isExpanded);
+    setIsExpanded(prevIsExpanded => !prevIsExpanded);
   };
 
   return (

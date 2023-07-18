@@ -1,11 +1,17 @@
 import React from "react";
 import { Close } from "../../icons";
-import { useEditTodo } from "../../hooks";
+import { useDeleteSubtask, useEditTodo } from "../../hooks";
 import { useQueryClient } from "@tanstack/react-query";
 
 const Subtasks = ({ todo }) => {
   const queryClient = useQueryClient();
   const { editTodo } = useEditTodo({
+    onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
+    },
+  });
+
+  const { deleteSubtask } = useDeleteSubtask({
     onSuccess: () => {
       queryClient.invalidateQueries(["todos"]);
     },
@@ -32,9 +38,7 @@ const Subtasks = ({ todo }) => {
               type='button'
               className='h-8 w-8 rounded-md bg-red-500 pl-1 text-white hover:bg-red-600 '
               onClick={() => {
-                const updatedSubTasks = todo.subTasks.filter((subtaskFromList) => subtaskFromList.id !== subtask.id);
-                const updatedTodo = { ...todo, subTasks: updatedSubTasks };
-                editTodo(updatedTodo);
+                deleteSubtask({ id: todo.id, subtaskId: subtask.id });
               }}
             >
               <Close />

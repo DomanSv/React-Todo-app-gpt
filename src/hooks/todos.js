@@ -16,6 +16,11 @@ export function useDeleteTodo({ onSuccess }) {
   return { deleteTodo: mutate, isLoading, error };
 }
 
+export function useDeleteSubtask({ onSuccess }) {
+  const { mutate, isLoading, error } = useMutation({ mutationFn: TodoApi.deleteSubtask, onSuccess });
+  return { deleteSubtask: mutate, isLoading, error };
+}
+
 export function useEditTodo({ onSuccess }) {
   const { mutate, isLoading, error } = useMutation({ mutationFn: TodoApi.editTodo, onSuccess });
   return { editTodo: mutate, isLoading, error };
