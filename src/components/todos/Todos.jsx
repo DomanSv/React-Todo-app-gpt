@@ -4,6 +4,7 @@ import SubtaskDropdown from "./SubtaskDropdown";
 import { Close, CurvedArrow, Edit } from "../../icons";
 import { useDeleteTodo, useEditTodo } from "../../hooks";
 import { useQueryClient } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const Todos = ({ todos, isFetchingTodos }) => {
   const queryClient = useQueryClient();
@@ -61,14 +62,17 @@ const Todos = ({ todos, isFetchingTodos }) => {
               </p>
             </div>
             <div className='flex items-center'>
-              <button
-                type='button'
-                className='ml-2 h-10 rounded-md bg-orange-500 pl-2 pr-3 text-lg text-white hover:bg-orange-600 active:scale-95'
-              >
-                <div className='flex'>
-                  <Edit className='h-7 w-7 pr-1' /> Edit
-                </div>
-              </button>
+              <Link to={`/edit/${todo.id}`}>
+                <button
+                  tabIndex={-1}
+                  type='button'
+                  className='ml-2 h-10 rounded-md bg-orange-500 pl-2 pr-3 text-lg text-white hover:bg-orange-600 active:scale-95'
+                >
+                  <div className='flex'>
+                    <Edit className='h-7 w-7 pr-1' /> Edit
+                  </div>
+                </button>
+              </Link>
               <button
                 type='button'
                 onClick={() => {

@@ -3,14 +3,18 @@ import Input from "./Input";
 import { Close } from "../../icons";
 
 export default function TodoForm(props) {
-  const { children, onSubmit } = props;
+  const { children, onSubmit, title, todoData } = props;
+
+  console.log(todoData);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm();
+  } = useForm({
+    defaultValues: todoData ? todoData : null,
+  });
 
   const { fields, append, remove } = useFieldArray({
     rules: { maxLength: 5 },
@@ -20,7 +24,7 @@ export default function TodoForm(props) {
 
   return (
     <div className='w-[500px] transition-all'>
-      <h1 className='my-4 text-center text-2xl font-semibold underline transition-all dark:text-white md:text-4xl'>Add Todo</h1>
+      <h1 className='my-4 text-center text-2xl font-semibold underline transition-all dark:text-white md:text-4xl'>{title}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='pb-1'>
           <label className='font-semibold dark:text-white'>Priority</label>
@@ -30,6 +34,7 @@ export default function TodoForm(props) {
           name='priority'
           id='priority'
           {...register("priority")}
+          defaultValue={todoData ? todoData.priority : "low"}
         >
           <option value='low'> 😎🤙Low</option>
           <option value='mid'>😑👍Medium</option>
@@ -40,6 +45,7 @@ export default function TodoForm(props) {
           placeholder='Enter title'
           label={<h1 className='pt-1 font-semibold dark:text-white'>Title</h1>}
           error={errors}
+          defaultValue={todoData ? todoData.title : ""}
           {...register("title", {
             required: { value: true, message: "Title field is required!" },
             minLength: { value: 2, message: "Title must be atleast 2 characters!" },
@@ -54,6 +60,7 @@ export default function TodoForm(props) {
           <textarea
             type='textarea'
             placeholder='Enter description'
+            defaultValue={todoData ? todoData.description : ""}
             {...register("description", {
               required: { value: false },
               minLength: { value: 2, message: "Description must be atleast 2 characters!" },

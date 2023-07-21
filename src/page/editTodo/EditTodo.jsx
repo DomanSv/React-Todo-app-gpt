@@ -1,25 +1,41 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import NavigationBar from "../../components/NavigationBar";
 import { useAuth } from "../../context/Auth";
-import { useAddTodo } from "../../hooks";
+import { useEditTodo, useTodosById } from "../../hooks";
 import TodoForm from "../../components/forms/TodoForm";
+import { useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { Loading } from "../../icons";
 
-export default function addTodo() {
+export default function EditTodo() {
   const { authenticated, isLoading, account, token } = useAuth();
+  const queryClient = useQueryClient();
+  const { id } = useParams();
+  let todoData = {};
+
   const navigateTo = useNavigate();
 
   if (!authenticated && !token) {
     return <Navigate to='/login' />;
   }
 
-  const { addTodo, error } = useAddTodo({
+  const { todo, error, isLoadingTodo } = useTodosById({
+    onSuccess: () => {},
+  });
+
+  useEffect(() => {
+  todoData = todo(id);
+  }, []);
+
+  const { editTodo } = useEditTodo({
     onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
       navigateTo("/");
     },
   });
 
   const onSubmit = (data) => {
-    addTodo(data);
+    editTodo(data);
   };
 
   const serverError = error?.response?.data?.message;
@@ -27,8 +43,11 @@ export default function addTodo() {
   return (
     <div>
       <NavigationBar username={account?.username} isLoading={isLoading} />
+      {isLoadingTodo ? (<div className='mt-4 flex justify-center'>
+          <Loading className='h-10 w-10 animate-spin font-extrabold text-indigo-600 dark:text-white' />
+        </div>) : (
       <div className='relative isolate mx-auto mt-6 grid h-full w-full max-w-4xl place-items-center space-y-4 rounded-lg border-2 border-dashed border-blue-900 bg-slate-300 bg-opacity-60 pb-5 pt-4 transition-all dark:border-white dark:bg-slate-800 dark:bg-opacity-50'>
-        <TodoForm onSubmit={onSubmit} title='Add Todo'>
+        <TodoForm onSubmit={onSubmit} title= 'Edit Todo' todoData= {todoData}>
           {Boolean(serverError) && <div className='mb-2 rounded-md bg-red-600 text-center text-white'>{serverError}</div>}
           <div className='mt-3 flex justify-end'>
             <Link to='/'>
@@ -46,6 +65,7 @@ export default function addTodo() {
           </div>
         </TodoForm>
       </div>
+        )}
     </div>
   );
 }

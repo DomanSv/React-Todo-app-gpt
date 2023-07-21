@@ -11,6 +11,11 @@ export function useTodos() {
   return { todos: data, tasksIsLoading: isLoading, tasksIsFetching: isFetching, error };
 }
 
+export function useTodosById({ onSuccess }) {
+  const { mutate, isLoading, error } = useMutation({ mutationFn: TodoApi.getTodoById, onSuccess });
+  return { todo: mutate, isLoadingTodo: isLoading, error };
+}
+
 export function useDeleteTodo({ onSuccess }) {
   const { mutate, isLoading, error } = useMutation({ mutationFn: TodoApi.deleteTodo, onSuccess });
   return { deleteTodo: mutate, isLoading, error };
