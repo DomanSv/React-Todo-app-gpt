@@ -2,7 +2,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import NavigationBar from "../../components/NavigationBar";
 import { useAuth } from "../../context/Auth";
 import { useAddTodo } from "../../hooks";
-import TodoForm from "../../components/forms/todoForm";
+import TodoForm from "../../components/forms/TodoForm";
 
 export default function addTodo() {
   const { authenticated, isLoading, account, token } = useAuth();
@@ -13,14 +13,12 @@ export default function addTodo() {
   }
 
   const { addTodo, error } = useAddTodo({
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       navigateTo("/");
     },
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     addTodo(data);
   };
 

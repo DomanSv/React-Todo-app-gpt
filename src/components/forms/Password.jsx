@@ -22,7 +22,11 @@ export default function Password(props) {
           },
         })}
       />
-      <button type='button' onClick={() => setPassVisible((v) => !v)} className='mt-1 mb-2 inline-flex text-blue-400 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 p-1'>
+      <button
+        type='button'
+        onClick={() => setPassVisible((v) => !v)}
+        className='mt-1 mb-2 inline-flex rounded-lg p-1 text-blue-400 hover:bg-slate-200 dark:hover:bg-slate-800'
+      >
         {passVisible ? <ClosedEye className='h-7 w-7' /> : <Eye className='h-7 w-7' />}
       </button>
     </div>

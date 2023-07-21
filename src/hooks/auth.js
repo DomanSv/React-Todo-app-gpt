@@ -15,9 +15,3 @@ export function useAccount({ enabled }) {
   const { data, isLoading, error } = useQuery(["account"], AuthApi.getAccount, { staleTime: Infinity, cacheTime: Infinity, enabled });
   return { account: data, isLoading, error };
 }
-
-export function useAddTodo({ onSuccess }) {
-  const { mutate, isLoading, error } = useMutation({ mutationFn: AuthApi.addTodo, onSuccess });
-  return { addTodo: mutate, isLoading, error };
-}
-
