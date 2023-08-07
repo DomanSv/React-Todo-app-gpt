@@ -11,9 +11,9 @@ export function useTodos() {
   return { todos: data, tasksIsLoading: isLoading, tasksIsFetching: isFetching, error };
 }
 
-export function useTodosById({ onSuccess }) {
-  const { mutate, isLoading, error } = useMutation({ mutationFn: TodoApi.getTodoById, onSuccess });
-  return { todo: mutate, isLoadingTodo: isLoading, error };
+export function useTodosById({ id, enabled }) {
+  const { data, isLoading, error, isFetching } = useQuery(["todos", id], () => TodoApi.getTodoById(id), {enabled});
+  return { todo: data, isLoadingTodo: isLoading, error, isFetchingTodo: isFetching };
 }
 
 export function useDeleteTodo({ onSuccess }) {
