@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 function Input(props, ref) {
-  const { error, name, id = name, label, defaultValue, ...rest } = props;
+  const { error, name, id = name, label, ...rest } = props;
   const inputError = error?.message ?? error?.[name]?.message;
 
   return (
@@ -14,7 +14,6 @@ function Input(props, ref) {
           id={id}
           {...rest}
           ref={ref}
-          defaultValue={defaultValue}
         />
         {inputError && <span className='font-semibold text-red-500'>{inputError}</span>}
       </label>

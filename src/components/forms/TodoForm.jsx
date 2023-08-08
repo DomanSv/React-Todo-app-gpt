@@ -21,7 +21,7 @@ export default function TodoForm(props) {
   });
   
   return (
-    <div className='w-[500px] transition-all'>
+    <div className='max-w-[500px] w-full p-2 transition-all'>
           <div>
       <h1 className='my-4 text-center text-2xl font-semibold underline transition-all dark:text-white md:text-4xl'>{title}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
