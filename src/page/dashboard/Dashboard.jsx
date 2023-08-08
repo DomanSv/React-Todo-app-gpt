@@ -1,7 +1,6 @@
 import { Link, Navigate } from "react-router-dom";
 import Greetings from "../../components/Greetings";
 import { useAuth } from "../../context/Auth";
-import NavigationBar from "../../components/NavigationBar";
 import { Loading } from "../../icons";
 import Todos from "../../components/todos/Todos";
 import { useTodos } from "../../hooks";
@@ -16,7 +15,6 @@ export default function Dashboard() {
 
   return (
     <div>
-      <NavigationBar username={account?.username} isLoading={isLoading} />
       <div className=' mt-4 bg-clip-text text-center text-9xl font-extrabold text-indigo-600 transition-all dark:text-indigo-500'>
         TODO
         <Greetings username={account?.username} isLoading={isLoading} />

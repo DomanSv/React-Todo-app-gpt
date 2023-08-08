@@ -3,24 +3,27 @@ import Input from "./Input";
 import { Close } from "../../icons";
 
 export default function TodoForm(props) {
-  const { children, onSubmit } = props;
+  const { children, onSubmit, title, todoData } = props;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm();
+  } = useForm({
+    defaultValues: todoData,
+  });
 
   const { fields, append, remove } = useFieldArray({
     rules: { maxLength: 5 },
     control, // control props comes from useForm (optional: if you are using FormContext)
     name: "subTasks", // unique name for your Field Array
   });
-
+  
   return (
-    <div className='w-[500px] transition-all'>
-      <h1 className='my-4 text-center text-2xl font-semibold underline transition-all dark:text-white md:text-4xl'>Add Todo</h1>
+    <div className='max-w-[500px] w-full p-2 transition-all'>
+          <div>
+      <h1 className='my-4 text-center text-2xl font-semibold underline transition-all dark:text-white md:text-4xl'>{title}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='pb-1'>
           <label className='font-semibold dark:text-white'>Priority</label>
@@ -113,6 +116,7 @@ export default function TodoForm(props) {
 
         {children}
       </form>
+      </div>
     </div>
   );
 }
