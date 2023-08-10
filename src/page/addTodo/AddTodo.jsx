@@ -2,9 +2,11 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/Auth";
 import { useAddTodo } from "../../hooks";
 import TodoForm from "../../components/forms/TodoForm";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function addTodo() {
   const { authenticated, token } = useAuth();
+  const queryClient = useQueryClient();
   const navigateTo = useNavigate();
 
   if (!authenticated && !token) {
@@ -13,6 +15,7 @@ export default function addTodo() {
 
   const { addTodo, error } = useAddTodo({
     onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
       navigateTo("/");
     },
   });

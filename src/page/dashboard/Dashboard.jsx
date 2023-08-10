@@ -7,7 +7,6 @@ import { useTodos } from "../../hooks";
 
 export default function Dashboard() {
   const { authenticated, isLoading, account, token } = useAuth();
-  const { todos, tasksIsLoading, tasksIsFetching } = useTodos();
 
   if (!authenticated && !token) {
     return <Navigate to='/login' />;
@@ -19,7 +18,7 @@ export default function Dashboard() {
         TODO
         <Greetings username={account?.username} isLoading={isLoading} />
       </div>
-      <div className='mx-auto mt-5 max-w-fit px-12 py-3'>
+      <div className='mx-auto mt-2 max-w-fit px-12 py-3'>
         <Link to='/add'>
           <button
             tabIndex={-1}
@@ -29,14 +28,7 @@ export default function Dashboard() {
           </button>
         </Link>
       </div>
-
-      {tasksIsLoading ? (
-        <div className='mt-4 flex justify-center'>
-          <Loading className='h-10 w-10 animate-spin font-extrabold text-indigo-600 dark:text-white' />
-        </div>
-      ) : (
-        <Todos todos={todos} isFetchingTodos={tasksIsFetching} />
-      )}
+      <Todos />
     </div>
   );
 }
