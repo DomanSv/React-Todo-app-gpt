@@ -1,14 +1,23 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Priority from "./Priority";
 import SubtaskDropdown from "./SubtaskDropdown";
-import { Close, CurvedArrow, Edit } from "../../icons";
+import { Close, CurvedArrow, Edit, Filter, Loading } from "../../icons";
 import { useDeleteTodo, useEditTodo } from "../../hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { useFilter } from "../../context/Filter";
 
-const Todos = ({ todos, isFetchingTodos }) => {
+const Todos = () => {
   const queryClient = useQueryClient();
   const deletingTodoRef = useRef();
+
+  const { filteredTodos, todos, filters, dispatchFilters, tasksIsLoading, tasksIsFetching } = useFilter();
+
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleFilters = () => {
+    setIsExpanded((prevIsExpanded) => !prevIsExpanded);
+  };
 
   const { deleteTodo, isLoading } = useDeleteTodo({
     onSuccess: () => {
@@ -22,6 +31,14 @@ const Todos = ({ todos, isFetchingTodos }) => {
     },
   });
 
+  if (tasksIsLoading) {
+    return (
+      <div className='mt-4 flex justify-center'>
+        <Loading className='h-10 w-10 animate-spin font-extrabold text-indigo-600 dark:text-white' />
+      </div>
+    );
+  }
+
   if (todos.data.length === 0) {
     return (
       <div className='mx-auto mt-1 flex justify-center'>
@@ -34,10 +51,66 @@ const Todos = ({ todos, isFetchingTodos }) => {
   return (
     <div
       className={`${
-        isFetchingTodos ? "pointer-events-none opacity-50" : ""
-      } isolate m-4 mx-auto h-full w-full max-w-4xl place-items-center space-y-7 pt-4 font-sans text-xl transition-all`}
+        tasksIsFetching ? "pointer-events-none opacity-50" : ""
+      } isolate mx-auto mb-4 h-full w-full max-w-4xl place-items-center space-y-7 font-sans text-xl transition-all`}
     >
-      {todos.data.map((todo) => (
+      <div className='flex'>
+        <button
+          tabIndex={-1}
+          className='mr-2 h-[53px] w-full select-none space-x-2 rounded-md border-2 border-indigo-500 bg-white bg-opacity-60 py-4 px-4 text-lg font-semibold leading-none transition-all hover:bg-indigo-200 hover:bg-opacity-50 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-500 dark:bg-opacity-30 dark:text-white dark:hover:bg-indigo-700 dark:hover:bg-opacity-50 sm:w-auto'
+          onClick={toggleFilters}
+        >
+          <Filter className='mr-1 inline-flex h-5 w-5' />
+          Filters
+        </button>
+
+        {isExpanded && (
+          <div className='flex items-center dark:text-white'>
+            <label className='mx-1'>By Priority:</label>
+            <select
+              className='mt-1 rounded border dark:bg-slate-800'
+              value={filters.priority}
+              onChange={(e) =>
+                dispatchFilters({
+                  type: "SET_PRIORITY_FILTER",
+                  payload: e.target.value,
+                })
+              }
+            >
+              <option value='all'>All</option>
+              <option value='low'>😎🤙Low</option>
+              <option value='mid'>😑👍Mid</option>
+              <option value='high'>😵‍💫⚠️High</option>
+            </select>
+
+            <label className='mx-2'>By Status:</label>
+            <select
+              className='mt-1 rounded border dark:bg-slate-800'
+              value={filters.done !== null ? filters.done.toString() : "null"}
+              onChange={(e) =>
+                dispatchFilters({
+                  type: "SET_DONE_FILTER",
+                  payload: e.target.value === "null" ? null : e.target.value === "true",
+                })
+              }
+            >
+              <option value='null'>All</option>
+              <option value='true'>✅Complete</option>
+              <option value='false'>❌Incomplete</option>
+            </select>
+            <label className='mx-2'>By Title:</label>
+            <input
+              type='text'
+              className='p2-1 mt-1 rounded border px-2 dark:bg-slate-800'
+              placeholder='Search by title'
+              value={filters.title}
+              onChange={(e) => dispatchFilters({ type: "SET_TITLE_FILTER", payload: e.target.value })}
+            />
+          </div>
+        )}
+      </div>
+      {filteredTodos.length === 0 && <div className='text-center font-mono dark:text-white'>No matching data</div>}
+      {filteredTodos.map((todo) => (
         <div
           className={`isolate mx-auto h-full w-full max-w-4xl rounded-lg border-2 border-slate-300 bg-white transition-all dark:border-slate-500 dark:bg-slate-800 dark:text-white ${
             todo.done ? "border-green-600 dark:border-green-500" : ""

@@ -58,7 +58,7 @@ export default function EditTodo() {
               </button>
             </Link>
             <button className='peer relative flex select-none justify-center gap-1 rounded-md bg-indigo-500 py-3 px-4 text-base font-semibold leading-none text-white outline-none ring-offset-2 transition-all hover:bg-indigo-600 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto'>
-              Create
+              Edit
             </button>
           </div>
         </TodoForm>

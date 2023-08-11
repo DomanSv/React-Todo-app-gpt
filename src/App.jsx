@@ -6,6 +6,7 @@ import { ThemeProvider } from "./context/Theme";
 import { AddTodo } from "./page/addTodo";
 import { EditTodo } from "./page/editTodo";
 import Layout from "./page/layout/Layout";
+import { FilterProvider } from "./context/Filter";
 
 export default function App() {
   return (
@@ -16,7 +17,14 @@ export default function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/' element={<Layout />}>
-              <Route index element={<Dashboard />} />
+              <Route
+                index
+                element={
+                  <FilterProvider>
+                    <Dashboard />
+                  </FilterProvider>
+                }
+              />
               <Route path='add' element={<AddTodo />} />
               <Route path='/edit/:id' element={<EditTodo />} />
             </Route>
