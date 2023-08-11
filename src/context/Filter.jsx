@@ -2,23 +2,21 @@ import { createContext, useContext, useReducer } from "react";
 import { useTodos } from "../hooks";
 
 export const FilterContext = createContext();
+const filtersReducer = (state, action) => {
+  switch (action.type) {
+    case "SET_PRIORITY_FILTER":
+      return { ...state, priority: action.payload };
+    case "SET_DONE_FILTER":
+      return { ...state, done: action.payload };
+    case "SET_TITLE_FILTER":
+      return { ...state, title: action.payload };
+    default:
+      return state;
+  }
+};
 
 export function FilterProvider({ children }) {
   const { todos, tasksIsLoading, tasksIsFetching } = useTodos();
-
-  const filtersReducer = (state, action) => {
-    switch (action.type) {
-      case "SET_PRIORITY_FILTER":
-        return { ...state, priority: action.payload };
-      case "SET_DONE_FILTER":
-        return { ...state, done: action.payload };
-      case "SET_TITLE_FILTER":
-        return { ...state, title: action.payload };
-      default:
-        return state;
-    }
-  };
-
   const [filters, dispatchFilters] = useReducer(filtersReducer, {
     priority: "all",
     done: null,
@@ -33,7 +31,7 @@ export function FilterProvider({ children }) {
 
   let filteredTodos;
 
-  if(!tasksIsLoading){
+  if (!tasksIsLoading) {
     filteredTodos = filtersArray.reduce((prev, curr) => prev.filter(curr), todos.data);
   }
 

@@ -1,9 +1,7 @@
 import { Link, Navigate } from "react-router-dom";
 import Greetings from "../../components/Greetings";
 import { useAuth } from "../../context/Auth";
-import { Loading } from "../../icons";
 import Todos from "../../components/todos/Todos";
-import { useTodos } from "../../hooks";
 
 export default function Dashboard() {
   const { authenticated, isLoading, account, token } = useAuth();

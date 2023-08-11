@@ -13,18 +13,23 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <ThemeProvider>
-          <FilterProvider>
-            <Routes>
-              <Route path='/register' element={<Register />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/' element={<Layout />}>
-                <Route index element={<Dashboard />} />
-                <Route path='add' element={<AddTodo />} />
-                <Route path='/edit/:id' element={<EditTodo />} />
-              </Route>
-              <Route path='*' element={<>Not Found 404</>} />
-            </Routes>
-          </FilterProvider>
+          <Routes>
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/' element={<Layout />}>
+              <Route
+                index
+                element={
+                  <FilterProvider>
+                    <Dashboard />
+                  </FilterProvider>
+                }
+              />
+              <Route path='add' element={<AddTodo />} />
+              <Route path='/edit/:id' element={<EditTodo />} />
+            </Route>
+            <Route path='*' element={<>Not Found 404</>} />
+          </Routes>
         </ThemeProvider>
       </AuthProvider>
     </BrowserRouter>
