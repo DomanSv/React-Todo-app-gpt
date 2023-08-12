@@ -10,3 +10,5 @@ export { ReactComponent as Close } from "./x.svg";
 export { ReactComponent as Edit } from "./edit.svg";
 export { ReactComponent as CurvedArrow } from "./curved_arrow.svg";
 export { ReactComponent as Filter } from "./filter.svg";
+export { ReactComponent as List } from "./list.svg";
+export { ReactComponent as Grid } from "./grid.svg";
