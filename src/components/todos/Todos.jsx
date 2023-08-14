@@ -21,7 +21,7 @@ const Todos = () => {
     setIsExpanded((prevIsExpanded) => !prevIsExpanded);
   };
 
-  const { isListView } = useViewMode();
+  const { viewMode } = useViewMode();
 
   const { deleteTodo, isLoading } = useDeleteTodo({
     onSuccess: () => {
@@ -68,15 +68,15 @@ const Todos = () => {
           Filters
         </button>
 
-        {isExpanded && <FiltersMenu />}
+        {isExpanded && <div className='bg-white dark:bg-slate-800 rounded-lg px-3 py-2 border-2 border-slate-300'><FiltersMenu /> </div>}
       </div>
       {filteredTodos.length === 0 && <div className='text-center font-mono dark:text-white'>No matching data</div>}
 
-      <div className={`${!isListView ? "grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2" : ""}`}>
+      <div className={`${viewMode === "grid" ? "grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2" : ""}`}>
         {filteredTodos.map((todo) => (
           <div
             className={`${
-              isListView ? "my-5" : ""
+              viewMode === "list" ? "my-5" : ""
             } isolate mx-auto h-full w-full max-w-4xl rounded-lg border-2 border-slate-300 bg-white transition-all dark:border-slate-500 dark:bg-slate-800 dark:text-white ${
               todo.done ? "border-green-600 dark:border-green-500" : ""
             } ${isLoading && deletingTodoRef.current === todo.id ? "pointer-events-none opacity-50" : ""}`}
