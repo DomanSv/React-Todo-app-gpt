@@ -1,11 +1,9 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import { useLocalStorage } from "../hooks";
 
 export const ViewModeContext = createContext();
 
 export function ViewModeProvider({ children }) {
-  const [isListView, setIsListView] = useState(true);
-
   const [viewMode, setViewMode] = useLocalStorage("viewMode", "list");
 
   if (viewMode === null) {
@@ -15,8 +13,6 @@ export function ViewModeProvider({ children }) {
   return (
     <ViewModeContext.Provider
       value={{
-        isListView,
-        setIsListView,
         setViewMode,
         viewMode,
       }}

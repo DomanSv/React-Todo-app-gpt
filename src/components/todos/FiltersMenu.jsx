@@ -83,16 +83,7 @@ const FiltersMenu = () => {
             className='ml-3 rounded-lg bg-orange-500 px-2 py-2 active:scale-95'
             onClick={() => {
               dispatchFilters({
-                type: "SET_PRIORITY_FILTER",
-                payload: "all",
-              });
-              dispatchFilters({
-                type: "SET_DONE_FILTER",
-                payload: null,
-              });
-              dispatchFilters({
-                type: "SET_TITLE_FILTER",
-                payload: "",
+                type: "RESET_FILTERS",
               });
             }}
           >
