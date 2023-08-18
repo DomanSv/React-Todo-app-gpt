@@ -10,6 +10,8 @@ const filtersReducer = (state, action) => {
       return { ...state, done: action.payload };
     case "SET_TITLE_FILTER":
       return { ...state, title: action.payload };
+    case "RESET_FILTERS":
+      return { priority: "all", done: null, title: "" };
     default:
       return state;
   }
