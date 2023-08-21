@@ -17,7 +17,7 @@ const queryClient = new QueryClient({
   },
 });
 
-prepareMocks().then(() => {
+// prepareMocks().then(() => {
   ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
@@ -26,4 +26,3 @@ prepareMocks().then(() => {
       </QueryClientProvider>
     </React.StrictMode>
   );
-});

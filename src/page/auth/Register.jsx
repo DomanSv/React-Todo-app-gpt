@@ -20,7 +20,7 @@ export default function Register() {
     registerUser(data);
   };
 
-  const serverError = error?.response?.data?.message;
+  const serverError = error?.response?.data;
 
   return (
     <div className='relative isolate mx-auto mt-6 grid h-full w-full max-w-4xl place-items-center space-y-4 pb-5 pt-8'>
