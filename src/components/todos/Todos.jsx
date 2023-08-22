@@ -46,7 +46,7 @@ const Todos = () => {
   if (todos.data.length === 0) {
     return (
       <div className='mt-1 flex justify-center'>
-        <span className='transition-alldark: text-xl font-semibold dark:text-white'>Start by adding some tasks!</span>
+        <span className='transition-alldark: text-xl font-semibold dark:text-white'>Започни с добавяне на задача!</span>
         <CurvedArrow className='inline h-12 w-12 -translate-x-3 -translate-y-6 skew-x-12 -scale-x-100 transform text-indigo-500 transition-all' />
       </div>
     );
@@ -65,7 +65,7 @@ const Todos = () => {
           onClick={toggleFilters}
         >
           <Filter className='mr-1 inline-flex h-5 w-5' />
-          Filters
+          Филтри
         </button>
 
         {isExpanded && <div className='bg-white dark:bg-slate-800 rounded-lg px-3 py-2 border-2 border-slate-300'><FiltersMenu /> </div>}
@@ -107,7 +107,7 @@ const Todos = () => {
                     className='ml-2 h-10 rounded-md bg-orange-500 pl-2 pr-3 text-lg text-white hover:bg-orange-600 active:scale-95'
                   >
                     <div className='flex'>
-                      <Edit className='h-7 w-7 pr-1' /> Edit
+                      <Edit className='h-7 w-7 pr-1' /> Редактирай 
                     </div>
                   </button>
                 </Link>

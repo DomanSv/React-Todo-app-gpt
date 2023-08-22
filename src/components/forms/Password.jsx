@@ -11,14 +11,14 @@ export default function Password(props) {
     <div>
       <Input
         type={passVisible ? "text" : "password"}
-        placeholder='Enter Password'
-        label={<h1 className='mt-2 dark:text-white'>Password</h1>}
+        placeholder='Въведете парола'
+        label={<h1 className='mt-2 dark:text-white'>Парола</h1>}
         error={errors}
         {...register("password", {
-          required: { value: true, message: "Password field is required!" },
+          required: { value: true, message: "Полето за парола е задължително!" },
           pattern: {
             value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
-            message: "Password must be minimum 8 characters with atleast 1 uppercase character, 1 lowercase character and 1 number",
+            message: "Паролата трябва да съдържа минимум 8 знака с поне 1 главна буква, 1 малка буква и 1 цифра",
           },
         })}
       />

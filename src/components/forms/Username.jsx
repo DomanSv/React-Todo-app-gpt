@@ -7,13 +7,13 @@ export default function Username(props) {
   return (
     <Input
       type='text'
-      placeholder='Enter Username'
-      label={<h1 className='dark:text-white'>Username</h1>}
+      placeholder='Въведете потребителско име'
+      label={<h1 className='dark:text-white'>Потребителско име</h1>}
       error={errors}
       {...register("username", {
-        required: { value: true, message: "Username field is required!" },
-        minLength: { value: 2, message: "Username must be atleast 2 characters!" },
-        maxLength: { value: 50, message: "Username must be less than 50 characters!" },
+        required: { value: true, message: "Полето за потребителско име е задължително!" },
+        minLength: { value: 2, message: "Потребителското име трябва да е поне 2 знака!" },
+        maxLength: { value: 50, message: "Потребителското име трябва да е по-малко от 50 знака!" },
       })}
     />
   );

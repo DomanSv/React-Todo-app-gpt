@@ -13,13 +13,13 @@ const Greetings = ({ username, isLoading }) => {
     );
   }
 
-  if (hours < 12) greet = "Morning";
-  else if (hours >= 12 && hours <= 17) greet = "Afternoon";
-  else if (hours >= 17 && hours <= 24) greet = "Evening";
+  if (hours < 12) greet = "Добро утро";
+  else if (hours >= 12 && hours <= 17) greet = "Добър ден";
+  else if (hours >= 17 && hours <= 24) greet = "Добър вечер";
 
   return (
-    <p className='text-center text-3xl font-normal text-gray-800 transition-all dark:font-thin dark:text-gray-300'>
-      Good {greet}, {username}!
+    <p className='mt-6 text-center text-3xl font-normal text-gray-800 transition-all dark:font-thin dark:text-gray-300'>
+      {greet}, {username}!
     </p>
   );
 };

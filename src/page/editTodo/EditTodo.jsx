@@ -45,7 +45,7 @@ export default function EditTodo() {
   return (
     <div>
       <div className='relative isolate mx-auto mt-6 grid h-full w-full max-w-4xl place-items-center space-y-4 rounded-lg border-2 border-dashed border-blue-900 bg-slate-300 bg-opacity-60 pb-5 pt-4 transition-all dark:border-white dark:bg-slate-800 dark:bg-opacity-50'>
-        <TodoForm onSubmit={onSubmit} title='Edit Todo' todoData={todo.data}>
+        <TodoForm onSubmit={onSubmit} title='Редактирай Задача' todoData={todo.data}>
           {Boolean(serverError) && <div className='mb-2 rounded-md bg-red-600 text-center text-white'>{serverError}</div>}
           <div className='mt-3 flex justify-end'>
             <Link to='/'>
@@ -54,11 +54,11 @@ export default function EditTodo() {
                 tabIndex={-1}
                 className='relative mr-3 inline-flex select-none justify-center gap-1 rounded-md bg-red-500 py-3 px-4 text-base font-semibold leading-none text-white outline-none ring-offset-2 transition-all hover:bg-red-600 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto'
               >
-                Cancel
+                Назад
               </button>
             </Link>
             <button className='peer relative flex select-none justify-center gap-1 rounded-md bg-indigo-500 py-3 px-4 text-base font-semibold leading-none text-white outline-none ring-offset-2 transition-all hover:bg-indigo-600 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto'>
-              Edit
+              Редактирай!
             </button>
           </div>
         </TodoForm>

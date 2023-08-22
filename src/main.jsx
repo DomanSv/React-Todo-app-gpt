@@ -5,7 +5,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import App from "./App";
 
-import { prepareMocks } from "./mocks";
 import "./index.css";
 
 const queryClient = new QueryClient({
@@ -17,7 +16,7 @@ const queryClient = new QueryClient({
   },
 });
 
-// prepareMocks().then(() => {
+
   ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
