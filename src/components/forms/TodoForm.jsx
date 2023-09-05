@@ -26,7 +26,7 @@ export default function TodoForm(props) {
       <h1 className='my-4 text-center text-2xl font-semibold underline transition-all dark:text-white md:text-4xl'>{title}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='pb-1'>
-          <label className='font-semibold dark:text-white'>Priority</label>
+          <label className='font-semibold dark:text-white'>Приоритет</label>
         </div>
         <select
           className='block w-full rounded-md border-gray-300 transition-shadow focus:border-indigo-500 focus:bg-white focus:ring focus:ring-indigo-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-slate-500 dark:text-white dark:ring-offset-slate-900 dark:placeholder:text-slate-200 dark:focus:bg-slate-600'
@@ -34,33 +34,32 @@ export default function TodoForm(props) {
           id='priority'
           {...register("priority")}
         >
-          <option value='low'> 😎🤙Low</option>
-          <option value='mid'>😑👍Medium</option>
-          <option value='high'> 😵‍💫⚠️High</option>
+          <option value='low'> 😎🤙Нисък</option>
+          <option value='mid'>😑👍Среден</option>
+          <option value='high'> 😵‍💫⚠️Висок</option>
         </select>
         <Input
           type='text'
-          placeholder='Enter title'
-          label={<h1 className='pt-1 font-semibold dark:text-white'>Title</h1>}
+          placeholder='Въведете заглавие'
+          label={<h1 className='pt-1 font-semibold dark:text-white'>Заглавие</h1>}
           error={errors}
           {...register("title", {
-            required: { value: true, message: "Title field is required!" },
-            minLength: { value: 2, message: "Title must be atleast 2 characters!" },
-            maxLength: { value: 50, message: "Title must be less than 50 characters!" },
+            required: { value: true, message: "Заглавието е задължително!" },
+            minLength: { value: 2, message: "Заглавието трябва да е поне 2 знака!" },
+            maxLength: { value: 50, message: "Заглавието трябва да е по-късо от 50 знака" },
           })}
         />
 
         <div className='pt-1'>
           <div className='pb-1'>
-            <label className='font-semibold dark:text-white'>Description</label>
+            <label className='font-semibold dark:text-white'>Описание</label>
           </div>
           <textarea
             type='textarea'
-            placeholder='Enter description'
+            placeholder='Въведете описание'
             {...register("description", {
               required: { value: false },
-              minLength: { value: 2, message: "Description must be atleast 2 characters!" },
-              maxLength: { value: 500, message: "Description must be less than 500 characters!" },
+              maxLength: { value: 500, message: "Описанието трябва да е по-късо от 500 знака" },
             })}
             className='block min-h-[7rem] w-full rounded-md border transition-shadow focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-slate-500 dark:text-white dark:ring-offset-slate-900 dark:placeholder:text-slate-200 dark:focus:bg-slate-600'
             {...register("description")}
@@ -77,7 +76,7 @@ export default function TodoForm(props) {
             }}
           >
             <span>
-              + Add Subtask{" "}
+              + Добави Подзадача{" "}
               <span role='img' aria-label='scroll'>
                 📜
               </span>
@@ -88,18 +87,18 @@ export default function TodoForm(props) {
         {fields.map((field, index) => (
           <div className='mt-2 flex flex-col' key={field.id}>
             <div className='mb-1'>
-              <label className='dark:text-white'>{`Subtask#${index + 1}`}</label>
+              <label className='dark:text-white'>{`Подзадача #${index + 1}`}</label>
             </div>
             <div className='flex w-full'>
               <Controller
                 control={control}
                 name={`subTasks.${index}.title`}
                 rules={{
-                  required: "Subtask title is required!",
-                  minLength: { value: 2, message: "Subtask title must be atleast 2 characters!" },
-                  maxLength: { value: 50, message: "Subtask title must be less than 50 characters!" },
+                  required: { value: true, message: "Подзадачата е задължителна!" },
+                  minLength: { value: 2, message: "Подзадачата трябва да е поне 2 знака!" },
+                  maxLength: { value: 50, message: "Подзадачата трябва да е по-късо от 50 знака" },
                 }}
-                render={({ field, fieldState: { error } }) => <Input placeholder='Enter Subtask' type='text' {...field} error={error} />}
+                render={({ field, fieldState: { error } }) => <Input placeholder='Въведете подзадача' type='text' {...field} error={error} />}
               />
               <button
                 type='button'

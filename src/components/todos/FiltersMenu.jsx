@@ -10,7 +10,7 @@ const FiltersMenu = () => {
   return (
     <div className='flex flex-col dark:text-white'>
       <div className='flex items-center'>
-        <label>By Priority:</label>
+        <label>Приоритет:</label>
         <select
           className='mt-1 ml-1 rounded border dark:bg-slate-800'
           value={filters.priority}
@@ -21,13 +21,13 @@ const FiltersMenu = () => {
             })
           }
         >
-          <option value='all'>All</option>
-          <option value='low'>😎🤙Low</option>
-          <option value='mid'>😑👍Mid</option>
-          <option value='high'>😵‍💫⚠️High</option>
+          <option value='all'>Всички</option>
+          <option value='low'>😎🤙Нисък</option>
+          <option value='mid'>😑👍Среден</option>
+          <option value='high'>😵‍💫⚠️Висок</option>
         </select>
 
-        <label className='mx-2'>By Status:</label>
+        <label className='ml-3 mr-1'>Статус:</label>
         <select
           className='mt-1 rounded border dark:bg-slate-800'
           value={filters.done !== null ? filters.done.toString() : "null"}
@@ -38,12 +38,12 @@ const FiltersMenu = () => {
             })
           }
         >
-          <option value='null'>All</option>
-          <option value='true'>✅Complete</option>
-          <option value='false'>❌Incomplete</option>
+          <option value='null'>Всички</option>
+          <option value='true'>✅Завършени</option>
+          <option value='false'>❌Незавършени</option>
         </select>
-        <div className='ml-2 flex items-center rounded'>
-          <div className='mr-1'>View Mode:</div>
+        <div className='ml-3 flex items-center rounded'>
+          <div className='mr-1'>Изглед:</div>
           <div className='rounded-lg bg-white py-1 dark:bg-slate-800'>
             <button
               className={`${
@@ -70,11 +70,11 @@ const FiltersMenu = () => {
       </div>
 
       <div className='mt-2 flex items-center rounded-lg py-1 transition-all'>
-        <label className='mr-1'>By Title:</label>
+        <label className='mr-1'>Заглавие:</label>
         <input
           type='text'
           className='mt-1 flex w-[485px] rounded border px-2 dark:bg-slate-800'
-          placeholder='Search by title'
+          placeholder='Търси по заглавие'
           value={filters.title}
           onChange={(e) => dispatchFilters({ type: "SET_TITLE_FILTER", payload: e.target.value })}
         />
@@ -87,7 +87,7 @@ const FiltersMenu = () => {
               });
             }}
           >
-            Reset Filters
+            Изчисти
           </button>
         </div>
       </div>

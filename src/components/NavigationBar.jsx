@@ -24,33 +24,33 @@ const NavigationBar = ({ username, isLoading }) => {
          rounded-md
          border-2 border-blue-400 bg-sky-100 drop-shadow-lg hover:flex peer-hover:flex dark:border-slate-400 dark:bg-slate-600'
         >
-          <a className='mt-2 ml-3 mb-1 flex dark:text-white'>Theme: {theme}</a>
+          <a className='mt-2 ml-3 mb-1 flex dark:text-white'>Тема: {theme}</a>
           <div className='ml-2 mr-2 inline-flex justify-center rounded-md bg-blue-300 pb-2 dark:bg-slate-800  dark:text-white'>
             <button
               className={`mt-2 ml-3 mr-3 h-full w-full rounded-md p-1 bg-${
-                theme === "system"
+                theme === "система"
                   ? "blue-500 dark:bg-indigo-600 dark:hover:bg-indigo-600"
                   : "blue-300 dark:bg-slate-800 dark:hover:bg-slate-500"
               } px-2 text-black hover:bg-blue-500 dark:text-white `}
-              onClick={() => setTheme("system")}
+              onClick={() => setTheme("система")}
             >
               <SystemColor className='h-8 w-8' />
             </button>
             <button
               className={`mt-2 h-full w-full rounded-md p-1 bg-${
-                theme === "light" ? "blue-500" : "blue-300 dark:bg-slate-800 dark:hover:bg-slate-500"
+                theme === "светла" ? "blue-500" : "blue-300 dark:bg-slate-800 dark:hover:bg-slate-500"
               } px-2 text-black hover:bg-blue-500 dark:text-white `}
-              onClick={() => setTheme("light")}
+              onClick={() => setTheme("светла")}
             >
               <LightMode className='h-8 w-8' />
             </button>
             <button
               className={`mt-2 ml-3 mr-3 h-full w-full rounded-md p-1 bg-${
-                theme === "dark"
+                theme === "тъмна"
                   ? "blue-500 dark:bg-indigo-600 dark:hover:bg-indigo-600"
                   : "blue-300 dark:bg-slate-800 dark:hover:bg-slate-500"
               } px-2 text-black hover:bg-blue-500 dark:text-white`}
-              onClick={() => setTheme("dark")}
+              onClick={() => setTheme("тъмна")}
             >
               <DarkMode className='h-8 w-8' />
             </button>
@@ -60,7 +60,7 @@ const NavigationBar = ({ username, isLoading }) => {
             className='outline-non mt-3 mb-3 mr-3 ml-3 inline-flex select-none justify-center gap-1 rounded-md border-2 border-transparent bg-red-500 py-1 px-3 text-base font-semibold leading-none text-white transition-all hover:bg-red-600 focus-visible:ring active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:ring-offset-slate-900 sm:w-auto'
             onClick={logOut}
           >
-            Log Out
+            Изход
           </button>
         </div>
       </div>

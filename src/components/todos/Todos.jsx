@@ -1,13 +1,15 @@
 import React, { useRef, useState } from "react";
 import Priority from "./Priority";
 import SubtaskDropdown from "./SubtaskDropdown";
-import { Close, CurvedArrow, Edit, Filter, Loading } from "../../icons";
+import { Close, CurvedArrow, Edit, Filter, Loading, Robot } from "../../icons";
 import { useDeleteTodo, useEditTodo } from "../../hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { useFilter } from "../../context/Filter";
 import { useViewMode } from "../../context/ViewMode";
 import FiltersMenu from "./filtersMenu";
+import { useAskGptById } from "../../hooks/gptHook";
+import AiResponse from "./AiResponse";
 
 const Todos = () => {
   const queryClient = useQueryClient();
@@ -34,6 +36,12 @@ const Todos = () => {
       queryClient.invalidateQueries(["todos"]);
     },
   });
+ 
+  const { askGpt, gptIsLoading } = useAskGptById({
+    onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
+    },
+  });
 
   if (tasksIsLoading) {
     return (
@@ -46,7 +54,7 @@ const Todos = () => {
   if (todos.data.length === 0) {
     return (
       <div className='mt-1 flex justify-center'>
-        <span className='transition-alldark: text-xl font-semibold dark:text-white'>Start by adding some tasks!</span>
+        <span className='transition-alldark: text-xl font-semibold dark:text-white'>Започни с добавяне на задача!</span>
         <CurvedArrow className='inline h-12 w-12 -translate-x-3 -translate-y-6 skew-x-12 -scale-x-100 transform text-indigo-500 transition-all' />
       </div>
     );
@@ -65,12 +73,16 @@ const Todos = () => {
           onClick={toggleFilters}
         >
           <Filter className='mr-1 inline-flex h-5 w-5' />
-          Filters
+          Филтри
         </button>
 
-        {isExpanded && <div className='bg-white dark:bg-slate-800 rounded-lg px-3 py-2 border-2 border-slate-300'><FiltersMenu /> </div>}
+        {isExpanded && (
+          <div className='rounded-lg border-2 border-slate-300 bg-white px-3 py-2 dark:bg-slate-800'>
+            <FiltersMenu />{" "}
+          </div>
+        )}
       </div>
-      {filteredTodos.length === 0 && <div className='text-center font-mono dark:text-white'>No matching data</div>}
+      {filteredTodos.length === 0 && <div className='text-center font-mono dark:text-white'>Няма съвпадаща информация!</div>}
 
       <div className={`${viewMode === "grid" ? "grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2" : ""}`}>
         {filteredTodos.map((todo) => (
@@ -91,7 +103,6 @@ const Todos = () => {
                   checked={todo.done}
                   onChange={() => {
                     todo.done = !todo.done;
-                    console.log(todo);
                     editTodo(todo);
                   }}
                 />
@@ -99,7 +110,26 @@ const Todos = () => {
                   {todo.title}
                 </p>
               </div>
+
               <div className='flex items-center'>
+                {!todo.hasAIResponse &&
+                  (gptIsLoading ? (
+                    <div className='mt-4 flex justify-center'>
+                      <Robot className='h-6 w-6 my-1 animate-bounce' />
+                    </div>
+                  ) : (
+                    <button
+                      type='button'
+                      className='rounded-lg bg-blue-500 px-2 py-1 text-white'
+                      onClick={() => {
+                        askGpt(todo.id);
+                        console.log(todo);
+                      }}
+                    >
+                      <Robot className='h-6 w-6 my-1' />
+                    </button>
+                  ))}
+
                 <Link to={`/edit/${todo.id}`}>
                   <button
                     tabIndex={-1}
@@ -107,7 +137,7 @@ const Todos = () => {
                     className='ml-2 h-10 rounded-md bg-orange-500 pl-2 pr-3 text-lg text-white hover:bg-orange-600 active:scale-95'
                   >
                     <div className='flex'>
-                      <Edit className='h-7 w-7 pr-1' /> Edit
+                      <Edit className='h-7 w-7 pr-1' /> Редактирай
                     </div>
                   </button>
                 </Link>
@@ -125,6 +155,7 @@ const Todos = () => {
             </div>
             {todo.description && <p className='pl-12 pb-4'>{todo.description}</p>}
             {todo.subTasks.length > 0 && <SubtaskDropdown todo={todo} />}
+            <AiResponse response={todo.airesponse} gptIsLoading={gptIsLoading} />
           </div>
         ))}
       </div>

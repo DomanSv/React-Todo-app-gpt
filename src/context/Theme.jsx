@@ -5,14 +5,14 @@ export const ThemeContext = createContext();
 const htmlElement = document.documentElement;
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme, resetTheme] = useLocalStorage("theme", "system");
+  const [theme, setTheme, resetTheme] = useLocalStorage("theme", "система");
   const darkQuery = useMedia("(prefers-color-scheme: dark");
 
   useEffect(() => {
-    if (theme === "dark") {
+    if (theme === "тъмна") {
       return htmlElement.classList.add("dark");
     }
-    if (theme === "light") {
+    if (theme === "светла") {
       return htmlElement.classList.remove("dark");
     }
     if (darkQuery) {
