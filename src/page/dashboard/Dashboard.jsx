@@ -12,7 +12,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div className=' mt-1 bg-clip-text text-center text-9xl font-extrabold text-indigo-600 transition-all dark:text-indigo-500'>
+      <div className=' mt-1 bg-clip-text text-center text-8xl font-extrabold text-indigo-600 transition-all dark:text-indigo-500'>
         Задачник
         <Greetings username={account?.username} isLoading={isLoading} />
       </div>

@@ -9,7 +9,7 @@ const SubtaskDropdown = ({ todo }) => {
   };
 
   return (
-    <div className='ml-6 mr-6 mb-4 rounded-lg bg-slate-200 dark:bg-slate-900'>
+    <div className='ml-6 mr-6 mb-2 rounded-lg bg-slate-200 dark:bg-slate-900'>
       <button className='w-full rounded-lg bg-indigo-600 p-2 px-4 py-2 text-sm font-semibold text-white' onClick={toggleDropdown}>
         {isExpanded ? "Скрий подзадачи" : `Покажи ${todo.subTasks.length} подзадачи`}
       </button>
